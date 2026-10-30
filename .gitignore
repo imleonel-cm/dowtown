@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.tools/
+.npm-cache/
+.chrome-qa/
+*.log
