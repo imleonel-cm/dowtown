@@ -1,14 +1,15 @@
-
 import { defineConfig } from 'astro/config';
 
 const isPreview = process.env.GITHUB_PAGES_PREVIEW === 'true';
+const previewBase = '/dowtown';
+const deploymentBase = isPreview ? previewBase : '';
 
 export default defineConfig({
   site: isPreview
     ? 'https://imleonel-cm.github.io'
     : 'https://downtownescrow.net',
 
-  ...(isPreview ? { base: '/downtown' } : {}),
+  ...(isPreview ? { base: `${previewBase}/` } : {}),
 
   output: 'static',
   trailingSlash: 'always',
@@ -16,11 +17,11 @@ export default defineConfig({
   redirects: {
     '/services': {
       status: 302,
-      destination: '/#services'
+      destination: `${deploymentBase}/#services`,
     },
     '/es/servicios': {
       status: 302,
-      destination: '/es/#services'
-    }
-  }
+      destination: `${deploymentBase}/es/#services`,
+    },
+  },
 });

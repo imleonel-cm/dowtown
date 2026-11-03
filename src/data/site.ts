@@ -36,6 +36,21 @@ export const routeMap: Record<PageKey, Record<Locale, string>> = {
   commercial: { en: '/services/commercial-escrow/', es: '/es/servicios/escrow-comercial/' }
 };
 
+const configuredBase = import.meta.env.BASE_URL === '/'
+  ? ''
+  : `/${import.meta.env.BASE_URL.replace(/^\/+|\/+$/g, '')}`;
+
+export const withBasePath = (href: string): string => {
+  if (!configuredBase || !href.startsWith('/') || href.startsWith('//')) return href;
+  if (href === configuredBase || href.startsWith(`${configuredBase}/`)) return href;
+  return `${configuredBase}${href}`;
+};
+
+for (const routes of Object.values(routeMap)) {
+  routes.en = withBasePath(routes.en);
+  routes.es = withBasePath(routes.es);
+}
+
 export const implementedPageKeys = ['home', 'about', 'contact', 'manufacturedHomes', 'probate', 'shortSale', 'reverseMortgage', 'residential', 'commercial'] as const satisfies readonly PageKey[];
 
 export const languageNames: Record<Locale, string> = {

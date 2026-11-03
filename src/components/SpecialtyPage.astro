@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { business, type ServiceIconName } from '../data/business';
-import { homeContent, routeMap, type Locale, type PageKey } from '../data/site';
+import { homeContent, routeMap, withBasePath, type Locale, type PageKey } from '../data/site';
 import type { SpecialtyContent } from '../data/specialty';
 import { navigationFor } from '../data/navigation';
 import { serviceNavigationFor } from '../data/serviceLinks';
@@ -161,7 +161,7 @@ const breadcrumbItems = [
           </div>
           <div class="specialty-related__list">
             {content.relatedServices.items.map((service) => (
-              <a href={service.href}>
+              <a href={withBasePath(service.href)}>
                 <span><strong>{service.title}</strong><small>{service.description}</small></span>
                 <span class="text-link">{content.relatedServices?.actionLabel} <Arrow /></span>
               </a>
