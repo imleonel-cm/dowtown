@@ -1,0 +1,49 @@
+---
+import { business } from '../data/business';
+import type { HomeContent, Locale } from '../data/site';
+import type { NavigationItem } from '../data/navigation';
+import type { ServiceNavigationItem } from '../data/serviceLinks';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  locale: Locale;
+  content: HomeContent['footer'];
+  navigation: readonly NavigationItem[];
+  services: readonly ServiceNavigationItem[];
+  wordmarkLabel: string;
+}
+
+const { locale, content, navigation, services, wordmarkLabel } = Astro.props;
+const footerNavigation = navigation.filter((item) => item.id !== 'services' && item.href);
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-intro">
+      <Wordmark locale={locale} label={wordmarkLabel} />
+      <p>{content.introLines[0]}<br />{content.introLines[1]}</p>
+    </div>
+    <div class="footer-column">
+      <h2>{content.exploreHeading}</h2>
+      <ul>{footerNavigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+    </div>
+    <div class="footer-column">
+      <h2>{content.servicesHeading}</h2>
+      <ul>{services.map((service) => (
+        <li>
+          {service.href
+            ? <a href={service.href}>{service.label}</a>
+            : <span class="footer-service-pending">{service.label} <small>{service.statusLabel}</small></span>}
+        </li>
+      ))}</ul>
+    </div>
+    <div class="footer-column footer-contact">
+      <h2>{content.contactHeading}</h2>
+      <p><a href={business.phoneHref}>{business.phoneDisplay}</a><br />{business.addressLine}<br />{business.cityLine}</p>
+    </div>
+  </div>
+  <div class="container copyright">
+    <span>© {new Date().getFullYear()} {business.legalName}</span>
+    <span>{content.copyrightContext}</span>
+  </div>
+</footer>

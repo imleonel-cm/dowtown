@@ -1,0 +1,15 @@
+---
+import { routeMap, type Locale } from '../data/site';
+
+interface Props {
+  inverse?: boolean;
+  locale: Locale;
+  label: string;
+}
+const { inverse = false, locale, label } = Astro.props;
+---
+
+<a class:list={['wordmark', { 'wordmark--inverse': inverse }]} href={`${routeMap.home[locale]}#home`} aria-label={label}>
+  <span class="wordmark__name">Downtown</span>
+  <span class="wordmark__descriptor">Community Escrow</span>
+</a>

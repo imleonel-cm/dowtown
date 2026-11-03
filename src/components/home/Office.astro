@@ -1,0 +1,52 @@
+---
+import { business } from '../../data/business';
+import type { HomeContent } from '../../data/site';
+import { Picture } from 'astro:assets';
+import residentialEscrowImage from '../../assets/residential-escrow-illustration.png';
+import Arrow from '../Arrow.astro';
+
+interface Props { content: HomeContent['why'] }
+const { content } = Astro.props;
+---
+
+<section id="why-downtown" class="office-section section-anchor">
+  <div class="container office-grid">
+    <figure class="office-image">
+      <div class="office-image__frame">
+        <Picture
+          src={residentialEscrowImage}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[390, 640, 960, 1280, 1536]}
+          sizes="(max-width: 760px) calc(100vw - 36px), 45vw"
+          width={1536}
+          height={1024}
+          quality={82}
+          alt={content.imageAlt}
+          loading="lazy"
+          decoding="async"
+          pictureAttributes={{ class: 'responsive-picture' }}
+        />
+      </div>
+      <figcaption>{content.imageCaption}</figcaption>
+      <span class="office-image__address" aria-hidden="true">{content.markerTop}<br /><strong>{content.markerBottom}</strong></span>
+    </figure>
+    <div class="office-copy">
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h2>{content.heading}</h2>
+      <p>{content.body}</p>
+      <address aria-label={content.addressLabel}><span aria-hidden="true">⌖</span><span>{business.addressLine}<br />{business.cityLine}</span></address>
+      <div class="trust-grid" aria-label={content.trustLabel}>
+        {content.trustSignals.map((signal) => (
+          <div class="trust-item">
+            <span>{signal.label}</span>
+            {'href' in signal && signal.href
+              ? <a href={signal.href}>{signal.value}</a>
+              : <strong>{signal.value}</strong>}
+          </div>
+        ))}
+      </div>
+      <a class="text-link" href={content.actionHref}>{content.action} <Arrow /></a>
+    </div>
+  </div>
+</section>

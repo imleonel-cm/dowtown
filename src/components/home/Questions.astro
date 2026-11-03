@@ -1,0 +1,59 @@
+---
+import type { HomeContent } from '../../data/site';
+
+interface Props { content: HomeContent['questions'] }
+const { content } = Astro.props;
+---
+
+<section id="faq" class="questions-section section-anchor">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="questions-heading">
+        <p class="eyebrow">{content.eyebrow}</p>
+        <h2>{content.heading}</h2>
+        <p>{content.intro}</p>
+      </div>
+      <div class="faq-accordion">
+        {content.items.map((item, index) => (
+          <details class="faq-item" name="home-faq" open={index === 0}>
+            <summary>
+              <span class="faq-question">{item.question}</span>
+              <span class="faq-symbol" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-answer"><p>{item.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+    <div class="preparation-block">
+      <h3>{content.preparationHeading}</h3>
+      <ol class="question-grid">
+        {content.preparationItems.map(([title, description], index) => (
+          <li>
+            <span class="step-number"><span>{String(index + 1).padStart(2, '0')}</span></span>
+            <div class="question-copy"><h4>{title}</h4><p>{description}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.faq-accordion').forEach((accordion) => {
+    const items = Array.from(accordion.querySelectorAll<HTMLDetailsElement>('details'));
+    items.forEach((item) => {
+      item.querySelector('summary')?.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        item.open = !item.open;
+      });
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        items.forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  });
+</script>

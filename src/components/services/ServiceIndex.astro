@@ -1,0 +1,38 @@
+---
+import type { ServicesPageContent } from '../../data/site';
+import type { ServiceKey } from '../../data/business';
+import ServiceIcon from '../ServiceIcon.astro';
+import Arrow from '../Arrow.astro';
+
+interface Props {
+  content: ServicesPageContent;
+  serviceHrefs: Partial<Record<ServiceKey, string>>;
+}
+const { content, serviceHrefs } = Astro.props;
+---
+
+<section class="services-index" aria-labelledby="services-index-heading">
+  <div class="container services-index__layout">
+    <div>
+      <h2 id="services-index-heading">{content.indexHeading}</h2>
+      <p>{content.indexIntro}</p>
+    </div>
+    <nav aria-label={content.indexLabel}>
+      <ul>
+        {content.items.map((service, index) => (
+          <li>
+            {serviceHrefs[service.key] ? (
+              <a href={serviceHrefs[service.key]}>
+                <ServiceIcon name={service.icon} />
+                <span><small>{String(index + 1).padStart(2, '0')}</small>{service.heading}</span>
+                <Arrow />
+              </a>
+            ) : (
+              <span><small>{String(index + 1).padStart(2, '0')}</small>{service.heading}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</section>

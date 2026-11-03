@@ -1,0 +1,16 @@
+---
+import type { Locale } from '../data/site';
+import { shortSaleContent } from '../data/shortSale';
+import SpecialtyPage from './SpecialtyPage.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<SpecialtyPage
+  locale={locale}
+  pageKey="shortSale"
+  content={shortSaleContent[locale]}
+  icon="document"
+  faqGroupName="short-sale-faq"
+/>

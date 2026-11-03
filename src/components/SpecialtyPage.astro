@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business, type ServiceIconName } from '../data/business';
+import { homeContent, routeMap, type Locale, type PageKey } from '../data/site';
+import type { SpecialtyContent } from '../data/specialty';
+import { navigationFor } from '../data/navigation';
+import { serviceNavigationFor } from '../data/serviceLinks';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Arrow from './Arrow.astro';
+import ServiceIcon from './ServiceIcon.astro';
+import ServiceQuestions from './services/ServiceQuestions.astro';
+import ServiceContact from './services/ServiceContact.astro';
+
+interface Props {
+  locale: Locale;
+  pageKey: Extract<PageKey, 'manufacturedHomes' | 'probate' | 'shortSale' | 'reverseMortgage' | 'residential' | 'commercial'>;
+  content: SpecialtyContent;
+  icon: ServiceIconName;
+  faqGroupName: string;
+}
+const { locale, pageKey, content, icon, faqGroupName } = Astro.props;
+const shared = homeContent[locale];
+const navigation = navigationFor(locale, pageKey);
+const serviceNavigation = serviceNavigationFor(locale);
+const headerContent = { ...shared.header, navigation, services: serviceNavigation };
+const homeHref = routeMap.home[locale];
+const pageHref = routeMap[pageKey][locale];
+const contactHref = routeMap.contact[locale];
+const contactLabel = shared.header.navigation.find((item) => item.id === 'contact')?.label ?? content.contact.homeContact;
+const boundaryHeadingId = `${pageKey}-boundaries-heading`;
+const breadcrumbItems = [
+  { label: content.breadcrumbHome, href: homeHref },
+  { label: content.breadcrumbCurrent, href: pageHref }
+];
+---
+
+<BaseLayout locale={locale} pageKey={pageKey} title={content.meta.title} description={content.meta.description}>
+  <a class="skip-link" href="#main-content">{content.skipLink}</a>
+  <Header
+    locale={locale}
+    content={headerContent}
+    wordmarkLabel={content.wordmarkLabel}
+    activePageKey={pageKey}
+    activeSectionKey="services"
+    ctaHref={contactHref}
+  />
+  <main id="main-content">
+    <section class="specialty-hero section-anchor" id="specialty-top">
+      <div class="container specialty-hero__inner">
+        <Breadcrumbs label={content.breadcrumbLabel} items={breadcrumbItems} />
+        <div class="specialty-hero__layout">
+          <div class="specialty-hero__copy">
+            <p class="eyebrow">{content.hero.eyebrow}</p>
+            <h1>{content.hero.heading}</h1>
+            <p>{content.hero.intro}</p>
+            <div class="button-row">
+              <a class="button" href={business.phoneHref}>{content.hero.primaryCta} <Arrow /></a>
+              <a class="button button--outline" href={`${homeHref}#services`}>{content.hero.secondaryCta}</a>
+            </div>
+          </div>
+          <div class="specialty-hero__mark" aria-hidden="true">
+            <ServiceIcon name={icon} />
+            <strong>{content.hero.marker}</strong>
+            <span>{content.hero.markerLabel}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="specialty-index" aria-label={content.index.label}>
+      <div class="container">
+        <strong>{content.index.label}</strong>
+        <ol>
+          {content.index.items.map(([label, id], index) => (
+            <li><a href={`#${id}`}><span>{String(index + 1).padStart(2, '0')}</span>{label}</a></li>
+          ))}
+        </ol>
+      </div>
+    </nav>
+
+    <section id="service-overview" class="specialty-overview section-anchor">
+      <div class="container specialty-overview__layout">
+        <div class="specialty-overview__copy">
+          <p class="eyebrow">{content.overview.eyebrow}</p>
+          <h2>{content.overview.heading}</h2>
+          <p class="specialty-lead">{content.overview.lead}</p>
+          <p>{content.overview.body}</p>
+        </div>
+        <aside class="specialty-boundaries" aria-labelledby={boundaryHeadingId}>
+          <h3 id={boundaryHeadingId}>{content.overview.boundaryHeading}</h3>
+          <ul>
+            {content.overview.boundaries.map(([title, description]) => (
+              <li><strong>{title}</strong><span>{description}</span></li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="transaction-variables" class="specialty-variables section-anchor">
+      <div class="container">
+        <div class="specialty-section-heading">
+          <p class="eyebrow">{content.variables.eyebrow}</p>
+          <h2>{content.variables.heading}</h2>
+          <p>{content.variables.intro}</p>
+        </div>
+        <div class="specialty-variable-list">
+          {content.variables.items.map(([title, description], index) => (
+            <article>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <div><h3>{title}</h3><p>{description}</p></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="prepare" class="specialty-prepare section-anchor">
+      <div class="container specialty-prepare__layout">
+        <div class="specialty-section-heading">
+          <p class="eyebrow">{content.prepare.eyebrow}</p>
+          <h2>{content.prepare.heading}</h2>
+          <p>{content.prepare.intro}</p>
+        </div>
+        <ol class="specialty-steps">
+          {content.prepare.items.map(([title, description], index) => (
+            <li>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <div><h3>{title}</h3><p>{description}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="consultation-information" class="specialty-information section-anchor">
+      <div class="container specialty-information__layout">
+        <div>
+          <p class="eyebrow">{content.information.eyebrow}</p>
+          <h2>{content.information.heading}</h2>
+          <p>{content.information.intro}</p>
+        </div>
+        <ul>
+          {content.information.items.map((item) => <li><span aria-hidden="true">✓</span>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <ServiceQuestions content={content.faq} id="specialty-faq" groupName={faqGroupName} />
+
+    {content.relatedServices && (
+      <section id="related-services" class="specialty-related section-anchor">
+        <div class="container specialty-related__layout">
+          <div class="specialty-section-heading">
+            <p class="eyebrow">{content.relatedServices.eyebrow}</p>
+            <h2>{content.relatedServices.heading}</h2>
+            <p>{content.relatedServices.intro}</p>
+          </div>
+          <div class="specialty-related__list">
+            {content.relatedServices.items.map((service) => (
+              <a href={service.href}>
+                <span><strong>{service.title}</strong><small>{service.description}</small></span>
+                <span class="text-link">{content.relatedServices?.actionLabel} <Arrow /></span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section id="related-sources" class="specialty-sources section-anchor">
+      <div class="container specialty-sources__layout">
+        <div class="specialty-section-heading">
+          <p class="eyebrow">{content.sources.eyebrow}</p>
+          <h2>{content.sources.heading}</h2>
+          <p>{content.sources.intro}</p>
+        </div>
+        <div class="specialty-source-list">
+          {content.sources.items.map((source) => (
+            <article>
+              <h3>{source.title}</h3>
+              <p>{source.description}</p>
+              <a class="text-link" href={source.href} target="_blank" rel="noreferrer">{content.sources.linkLabel} <Arrow /></a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceContact content={content.contact} contactHref={contactHref} contactLabel={contactLabel} />
+  </main>
+  <Footer
+    locale={locale}
+    content={shared.footer}
+    navigation={navigation}
+    services={serviceNavigation}
+    wordmarkLabel={content.wordmarkLabel}
+  />
+  <LanguageSwitcher locale={locale} pageKey={pageKey} label={shared.languageSwitcherLabel} />
+</BaseLayout>

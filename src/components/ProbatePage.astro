@@ -1,0 +1,16 @@
+---
+import type { Locale } from '../data/site';
+import { probateContent } from '../data/probate';
+import SpecialtyPage from './SpecialtyPage.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<SpecialtyPage
+  locale={locale}
+  pageKey="probate"
+  content={probateContent[locale]}
+  icon="people"
+  faqGroupName="probate-faq"
+/>

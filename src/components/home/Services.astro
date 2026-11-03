@@ -1,0 +1,36 @@
+---
+import type { HomeContent } from '../../data/site';
+import type { ServiceKey } from '../../data/business';
+import Arrow from '../Arrow.astro';
+import ServiceIcon from '../ServiceIcon.astro';
+
+interface Props {
+  content: HomeContent['services'];
+  servicesHref: string;
+  serviceHrefs: Partial<Record<ServiceKey, string>>;
+}
+const { content, servicesHref, serviceHrefs } = Astro.props;
+---
+
+<section id="services" class="services-section section-anchor">
+  <div class="container">
+    <div class="section-heading-row">
+      <h2>{content.heading}</h2>
+      <a class="text-link" href={servicesHref}>{content.action} <Arrow /></a>
+    </div>
+    <div id="services-list" class="service-grid">
+      {content.items.map((service, index) => (
+        <article id={service.id} class="service-card section-anchor">
+          <ServiceIcon name={service.icon} />
+          <div class="service-card__copy">
+            <div class="service-card__heading">
+              <h3>{serviceHrefs[service.key] ? <a href={serviceHrefs[service.key]}>{service.title}</a> : service.title}</h3>
+              <span class="service-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <p>{service.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

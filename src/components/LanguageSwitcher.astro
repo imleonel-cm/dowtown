@@ -1,0 +1,29 @@
+---
+import { languageOptions, routeMap, type Locale, type PageKey } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  pageKey: PageKey;
+  label: string;
+}
+
+const { locale, pageKey, label } = Astro.props;
+const languages = ['en', 'es'] as const;
+---
+
+<nav class="language-switcher" aria-label={label}>
+  {languages.map((language, index) => (
+    <>
+      {index > 0 && <span aria-hidden="true">|</span>}
+      <a
+        href={routeMap[pageKey][language]}
+        lang={language}
+        hreflang={language}
+        aria-label={languageOptions[language].accessibleLabel}
+        aria-current={locale === language ? 'page' : undefined}
+      >
+        {languageOptions[language].shortLabel}
+      </a>
+    </>
+  ))}
+</nav>

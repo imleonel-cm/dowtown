@@ -1,0 +1,33 @@
+---
+import { business } from '../../data/business';
+import type { ServicesPageContent } from '../../data/site';
+import ServiceIcon from '../ServiceIcon.astro';
+import Arrow from '../Arrow.astro';
+
+interface Props { content: ServicesPageContent }
+const { content } = Astro.props;
+---
+
+<section class="service-details" aria-label={content.detailsEyebrow}>
+  <div class="container service-details__list">
+    {content.items.map((service, index) => (
+      <article id={service.id} class="service-detail section-anchor">
+        <div class="service-detail__marker">
+          <ServiceIcon name={service.icon} />
+          <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        </div>
+        <div class="service-detail__copy">
+          <p class="eyebrow">{content.detailsEyebrow}</p>
+          <h2>{service.heading}</h2>
+          <p class="service-detail__summary">{service.summary}</p>
+          <div class="service-detail__guidance">
+            <h3>{content.guidanceLabel}</h3>
+            <p>{service.guidance}</p>
+          </div>
+        </div>
+        <a class="text-link service-detail__action" href={business.phoneHref}>{content.detailAction} <Arrow /></a>
+      </article>
+    ))}
+  </div>
+</section>
+

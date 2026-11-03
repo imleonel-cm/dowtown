@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business } from '../data/business';
+import { contactContent } from '../data/contact';
+import { homeContent, routeMap, type Locale } from '../data/site';
+import { navigationFor } from '../data/navigation';
+import { serviceNavigationFor } from '../data/serviceLinks';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Arrow from './Arrow.astro';
+import ServiceQuestions from './services/ServiceQuestions.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const content = contactContent[locale];
+const shared = homeContent[locale];
+const navigation = navigationFor(locale, 'contact');
+const services = serviceNavigationFor(locale);
+const headerContent = { ...shared.header, navigation, services };
+const homeHref = routeMap.home[locale];
+const contactHref = routeMap.contact[locale];
+const breadcrumbItems = [
+  { label: content.breadcrumbHome, href: homeHref },
+  { label: content.breadcrumbCurrent, href: contactHref }
+];
+---
+
+<BaseLayout locale={locale} pageKey="contact" title={content.meta.title} description={content.meta.description}>
+  <a class="skip-link" href="#main-content">{content.skipLink}</a>
+  <Header
+    locale={locale}
+    content={headerContent}
+    wordmarkLabel={content.wordmarkLabel}
+    activePageKey="contact"
+    ctaHref={business.phoneHref}
+  />
+  <main id="main-content">
+    <section class="about-hero contact-page-hero section-anchor" id="contact-top">
+      <div class="container about-hero__inner">
+        <Breadcrumbs label={content.breadcrumbLabel} items={breadcrumbItems} />
+        <div class="about-hero__layout">
+          <div class="about-hero__copy">
+            <p class="eyebrow">{content.hero.eyebrow}</p>
+            <h1>{content.hero.heading}</h1>
+            <p>{content.hero.intro}</p>
+            <div class="button-row">
+              <a class="button" href={business.phoneHref}>{content.hero.primaryCta} <Arrow /></a>
+              <a class="button button--outline" href="#message-form">{content.hero.secondaryCta}</a>
+            </div>
+          </div>
+          <div class="about-hero__mark" aria-hidden="true">
+            <strong>{content.hero.marker}</strong>
+            <span>{content.hero.markerLabel}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-information section-anchor" id="contact-information">
+      <div class="container contact-information__layout">
+        <div class="contact-section-heading">
+          <p class="eyebrow">{content.information.eyebrow}</p>
+          <h2>{content.information.heading}</h2>
+          <p>{content.information.intro}</p>
+        </div>
+        <dl class="contact-information__list">
+          {content.information.items.map(([label, value, href], index) => (
+            <div>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <dt>{label}</dt>
+              <dd>{href ? <a href={href}>{value}</a> : value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="contact-message section-anchor" id="message-form">
+      <div class="container contact-message__layout">
+        <div class="contact-section-heading">
+          <p class="eyebrow">{content.message.eyebrow}</p>
+          <h2>{content.message.heading}</h2>
+          <p>{content.message.intro}</p>
+          <p class="contact-safety">{content.message.safety}</p>
+          <a class="text-link" href={business.phoneHref}>{content.message.callAction} <Arrow /></a>
+        </div>
+        <form class="contact-form" aria-describedby="contact-form-status">
+          <fieldset disabled>
+            <legend class="sr-only">{content.message.eyebrow}</legend>
+            <div class="contact-form__grid">
+              <label>
+                <span>{content.message.fields.name}</span>
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>
+                <span>{content.message.fields.phone}</span>
+                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required />
+              </label>
+              <label class="contact-form__wide">
+                <span>{content.message.fields.service}</span>
+                <select name="service" required>
+                  <option value="">{content.message.fields.servicePlaceholder}</option>
+                  {content.message.topics.map((topic) => <option value={topic}>{topic}</option>)}
+                </select>
+              </label>
+              <label class="contact-form__wide">
+                <span>{content.message.fields.message}</span>
+                <textarea name="message" rows="5" required></textarea>
+              </label>
+            </div>
+            <button class="button contact-form__submit" type="submit">{content.message.fields.submit}</button>
+          </fieldset>
+          <p id="contact-form-status" class="contact-form__status" role="status">{content.message.status}</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="contact-office section-anchor" id="visit-office">
+      <div class="container contact-office__layout">
+        <div class="contact-section-heading">
+          <p class="eyebrow">{content.office.eyebrow}</p>
+          <h2>{content.office.heading}</h2>
+          <p>{content.office.intro}</p>
+        </div>
+        <address class="contact-office__card">
+          <span>{content.office.addressLabel}</span>
+          <strong>{business.legalName}</strong>
+          <p>{business.addressLine}<br />{business.cityLine}</p>
+          <a class="button button--outline" href={content.office.mapsHref} target="_blank" rel="noreferrer">{content.office.directions} <Arrow /></a>
+        </address>
+      </div>
+    </section>
+
+    <ServiceQuestions content={content.faq} id="contact-faq" groupName="contact-faq" />
+
+    <section class="contact-cta contact-page-final section-anchor" id="final-contact-action">
+      <div class="contact-architecture" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="container contact-cta__inner">
+        <div>
+          <p class="contact-eyebrow">{content.finalAction.eyebrow}</p>
+          <h2>{content.finalAction.heading}</h2>
+          <p>{content.finalAction.body}</p>
+        </div>
+        <a class="phone-button" href={business.phoneHref} aria-label={`${content.finalAction.action}: ${business.phoneDisplay}`}>
+          {content.finalAction.action} <Arrow />
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer
+    locale={locale}
+    content={shared.footer}
+    navigation={navigation}
+    services={services}
+    wordmarkLabel={content.wordmarkLabel}
+  />
+  <LanguageSwitcher locale={locale} pageKey="contact" label={shared.languageSwitcherLabel} />
+</BaseLayout>

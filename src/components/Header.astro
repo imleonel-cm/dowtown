@@ -1,0 +1,194 @@
+---
+import type { HomeContent, Locale, PageKey } from '../data/site';
+import type { NavigationItem } from '../data/navigation';
+import type { ServiceNavigationItem } from '../data/serviceLinks';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  locale: Locale;
+  content: Omit<HomeContent['header'], 'navigation'> & {
+    navigation: readonly NavigationItem[];
+    services: readonly ServiceNavigationItem[];
+  };
+  wordmarkLabel: string;
+  activePageKey: PageKey;
+  activeSectionKey?: PageKey;
+  ctaHref: string;
+}
+
+const { locale, content, wordmarkLabel, activePageKey, activeSectionKey, ctaHref } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <Wordmark locale={locale} label={wordmarkLabel} />
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      data-open-label={content.openMenuLabel}
+      data-close-label={content.closeMenuLabel}
+    >
+      <span class="sr-only">{content.openMenuLabel}</span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <nav id="primary-navigation" class="primary-nav" aria-label={content.navigationLabel}>
+      <ul class="primary-nav__list">
+        {content.navigation.map((item) => item.id === 'services' ? (
+          <li class="primary-nav__services">
+            <div class="primary-nav__service-row">
+              <span class="services-submenu-fallback-label">{item.label}</span>
+              <button
+                class:list={{ 'services-submenu-toggle': true, active: item.id === activeSectionKey }}
+                type="button"
+                aria-expanded="false"
+                aria-controls={`services-submenu-${locale}`}
+                aria-label={content.openServicesSubmenuLabel}
+                data-open-label={content.openServicesSubmenuLabel}
+                data-close-label={content.closeServicesSubmenuLabel}
+              >
+                <span>{item.label}</span>
+                <span class="services-submenu-toggle__icon" aria-hidden="true"></span>
+              </button>
+            </div>
+            <ul id={`services-submenu-${locale}`} class="services-submenu" aria-label={content.servicesSubmenuLabel}>
+              {content.services.map((service) => (
+                <li>
+                  {service.href ? (
+                    <a
+                      class:list={{ active: service.pageKey === activePageKey }}
+                      href={service.href}
+                      aria-current={service.pageKey === activePageKey ? 'page' : undefined}
+                    >{service.label}</a>
+                  ) : (
+                    <span class="services-submenu__pending">
+                      <span>{service.label}</span>
+                      <small>{service.statusLabel}</small>
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ) : (
+          <li>
+            <a
+              class:list={{ active: item.id === activePageKey || item.id === activeSectionKey }}
+              href={item.href}
+              aria-current={item.id === activePageKey ? 'page' : undefined}
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+      <a class="button button--small" href={ctaHref}>{content.cta} <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#primary-navigation');
+  const label = toggle?.querySelector('.sr-only');
+  const servicesItem = nav?.querySelector<HTMLElement>('.primary-nav__services');
+  const servicesToggle = nav?.querySelector<HTMLButtonElement>('.services-submenu-toggle');
+  const servicesSubmenu = nav?.querySelector<HTMLElement>('.services-submenu');
+  const desktop = window.matchMedia('(min-width: 881px)');
+  const openLabel = toggle?.dataset.openLabel ?? label?.textContent ?? '';
+  const closeLabel = toggle?.dataset.closeLabel ?? '';
+  const openServicesLabel = servicesToggle?.dataset.openLabel ?? servicesToggle?.getAttribute('aria-label') ?? '';
+  const closeServicesLabel = servicesToggle?.dataset.closeLabel ?? '';
+
+  const setServicesSubmenuOpen = (open: boolean, returnFocus = false) => {
+    if (!servicesToggle || !servicesSubmenu) return;
+    servicesToggle.setAttribute('aria-expanded', String(open));
+    servicesSubmenu.classList.toggle('is-open', open);
+    servicesSubmenu.inert = !open;
+    servicesToggle.setAttribute('aria-label', open ? closeServicesLabel : openServicesLabel);
+    if (returnFocus) servicesToggle.focus();
+  };
+
+  const closeMenu = (returnFocus = false) => {
+    if (!toggle || !nav) return;
+    setServicesSubmenuOpen(false);
+    toggle.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('is-open');
+    nav.inert = !desktop.matches;
+    if (label) label.textContent = openLabel;
+    if (returnFocus) toggle.focus();
+  };
+
+  const focusDestination = (href: string | null) => {
+    if (!href) return;
+    const destination = new URL(href, window.location.href);
+    if (destination.origin !== window.location.origin || destination.pathname !== window.location.pathname || !destination.hash) return;
+    const target = document.querySelector<HTMLElement>(destination.hash);
+    if (!target) return;
+
+    const hadTabindex = target.hasAttribute('tabindex');
+    if (!hadTabindex) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+
+    if (!hadTabindex) {
+      target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+    }
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (!nav || desktop.matches) return;
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    nav.classList.toggle('is-open', !open);
+    nav.inert = open;
+    if (label) label.textContent = open ? openLabel : closeLabel;
+  });
+
+  servicesToggle?.addEventListener('click', () => {
+    const open = servicesToggle.getAttribute('aria-expanded') === 'true';
+    setServicesSubmenuOpen(!open);
+  });
+
+  servicesToggle?.addEventListener('keydown', (event) => {
+    if ((event.key !== 'Enter' && event.key !== ' ') || event.repeat) return;
+    event.preventDefault();
+    const open = servicesToggle.getAttribute('aria-expanded') === 'true';
+    setServicesSubmenuOpen(!open);
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    const shouldMoveFocus = !desktop.matches && toggle?.getAttribute('aria-expanded') === 'true';
+    const href = link.getAttribute('href');
+    closeMenu();
+    if (shouldMoveFocus) requestAnimationFrame(() => focusDestination(href));
+  }));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (servicesToggle?.getAttribute('aria-expanded') === 'true') {
+      setServicesSubmenuOpen(false, true);
+      return;
+    }
+    if (toggle?.getAttribute('aria-expanded') === 'true') closeMenu(true);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (servicesToggle?.getAttribute('aria-expanded') !== 'true') return;
+    if (event.target instanceof Node && servicesItem?.contains(event.target)) return;
+    setServicesSubmenuOpen(false);
+  });
+
+  desktop.addEventListener('change', (event) => {
+    if (event.matches) {
+      closeMenu();
+      if (nav) nav.inert = false;
+    } else {
+      closeMenu();
+    }
+  });
+
+  if (toggle && nav) {
+    document.documentElement.classList.add('js');
+    nav.inert = !desktop.matches;
+    if (servicesSubmenu) servicesSubmenu.inert = true;
+  }
+</script>

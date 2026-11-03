@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business } from '../data/business';
+import { homeContent, routeMap, servicesPageContent, type Locale } from '../data/site';
+import { navigationFor } from '../data/navigation';
+import { serviceHrefsFor, serviceNavigationFor } from '../data/serviceLinks';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Arrow from './Arrow.astro';
+import ServiceIndex from './services/ServiceIndex.astro';
+import ServiceDetails from './services/ServiceDetails.astro';
+import ServiceQuestions from './services/ServiceQuestions.astro';
+import ServiceContact from './services/ServiceContact.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const content = servicesPageContent[locale];
+const shared = homeContent[locale];
+const navigation = navigationFor(locale, 'services');
+const serviceNavigation = serviceNavigationFor(locale);
+const headerContent = { ...shared.header, navigation, services: serviceNavigation };
+const homeHref = routeMap.home[locale];
+const contactHref = routeMap.contact[locale];
+const contactLabel = shared.header.navigation.find((item) => item.id === 'contact')?.label ?? content.contact.homeContact;
+const servicesHref = routeMap.services[locale];
+const serviceHrefs = serviceHrefsFor(locale);
+---
+
+<BaseLayout locale={locale} pageKey="services" title={content.meta.title} description={content.meta.description}>
+  <a class="skip-link" href="#main-content">{content.skipLink}</a>
+  <Header locale={locale} content={headerContent} wordmarkLabel={content.wordmarkLabel} activePageKey="services" ctaHref={contactHref} />
+  <main id="main-content">
+    <section class="services-hero section-anchor" id="services-top">
+      <div class="container services-hero__inner">
+        <nav class="breadcrumb" aria-label={content.breadcrumbLabel}>
+          <ol>
+            <li><a href={homeHref}>{content.breadcrumbHome}</a></li>
+            <li aria-current="page">{content.breadcrumbCurrent}</li>
+          </ol>
+        </nav>
+        <div class="services-hero__copy">
+          <p class="eyebrow">{content.eyebrow}</p>
+          <h1>{content.heading}</h1>
+          <p>{content.intro}</p>
+          <div class="button-row">
+            <a class="button" href={business.phoneHref}>{content.primaryCta} <Arrow /></a>
+            <a class="button button--outline" href="#how-to-choose">{content.secondaryCta}</a>
+          </div>
+        </div>
+        <div class="services-hero__aside" aria-hidden="true">
+          <span>01</span><i></i><span>06</span>
+        </div>
+      </div>
+    </section>
+    <ServiceIndex content={content} serviceHrefs={serviceHrefs} />
+    <ServiceDetails content={content} />
+    <section id="how-to-choose" class="services-choose section-anchor">
+      <div class="container services-choose__layout">
+        <div class="services-choose__intro">
+          <p class="eyebrow">{content.choose.eyebrow}</p>
+          <h2>{content.choose.heading}</h2>
+          <p>{content.choose.intro}</p>
+          <p class="services-choose__note">{content.choose.note}</p>
+        </div>
+        <ol class="services-choose__list">
+          {content.choose.items.map(([title, description], index) => (
+            <li>
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <div><h3>{title}</h3><p>{description}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+    <ServiceQuestions content={content.faq} />
+    <ServiceContact content={content.contact} contactHref={contactHref} contactLabel={contactLabel} />
+  </main>
+  <Footer locale={locale} content={shared.footer} navigation={navigation} services={serviceNavigation} wordmarkLabel={content.wordmarkLabel} />
+  <LanguageSwitcher locale={locale} pageKey="services" label={shared.languageSwitcherLabel} />
+</BaseLayout>

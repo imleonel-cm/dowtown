@@ -1,0 +1,28 @@
+---
+import { business } from '../../data/business';
+import type { ServicesPageContent } from '../../data/site';
+import Arrow from '../Arrow.astro';
+
+interface Props {
+  content: ServicesPageContent['contact'];
+  contactHref: string;
+  contactLabel?: string;
+}
+const { content, contactHref, contactLabel = content.homeContact } = Astro.props;
+---
+
+<section class="contact-cta services-contact">
+  <div class="contact-architecture" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="container contact-cta__inner">
+    <div>
+      <p class="contact-eyebrow">{content.eyebrow}</p>
+      <h2>{content.heading}</h2>
+      <p>{content.body}</p>
+      <a class="services-contact__home" href={contactHref}>{contactLabel} <Arrow /></a>
+    </div>
+    <a class="phone-button" href={business.phoneHref} aria-label={content.callLabel}>
+      {business.phoneDisplay} <Arrow />
+    </a>
+  </div>
+</section>
+

@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { aboutContent } from '../data/about';
+import { homeContent, routeMap, type Locale } from '../data/site';
+import { navigationFor } from '../data/navigation';
+import { serviceNavigationFor } from '../data/serviceLinks';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import ServiceIcon from './ServiceIcon.astro';
+import Arrow from './Arrow.astro';
+import ServiceQuestions from './services/ServiceQuestions.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const content = aboutContent[locale];
+const shared = homeContent[locale];
+const navigation = navigationFor(locale, 'about');
+const services = serviceNavigationFor(locale);
+const headerContent = { ...shared.header, navigation, services };
+const homeHref = routeMap.home[locale];
+const aboutHref = routeMap.about[locale];
+const contactHref = routeMap.contact[locale];
+const specialtyCards = services.map((service) => ({
+  ...service,
+  description: shared.services.items.find((item) => item.key === service.key)?.description ?? ''
+}));
+const breadcrumbItems = [
+  { label: content.breadcrumbHome, href: homeHref },
+  { label: content.breadcrumbCurrent, href: aboutHref }
+];
+---
+
+<BaseLayout locale={locale} pageKey="about" title={content.meta.title} description={content.meta.description}>
+  <a class="skip-link" href="#main-content">{content.skipLink}</a>
+  <Header
+    locale={locale}
+    content={headerContent}
+    wordmarkLabel={content.wordmarkLabel}
+    activePageKey="about"
+    ctaHref={contactHref}
+  />
+  <main id="main-content">
+    <section class="about-hero section-anchor" id="about-top">
+      <div class="container about-hero__inner">
+        <Breadcrumbs label={content.breadcrumbLabel} items={breadcrumbItems} />
+        <div class="about-hero__layout">
+          <div class="about-hero__copy">
+            <p class="eyebrow">{content.hero.eyebrow}</p>
+            <h1>{content.hero.heading}</h1>
+            <p>{content.hero.intro}</p>
+            <div class="button-row">
+              <a class="button" href="#about-specialties">{content.hero.primaryCta} <Arrow /></a>
+              <a class="button button--outline" href={contactHref}>{content.hero.secondaryCta}</a>
+            </div>
+          </div>
+          <div class="about-hero__mark" aria-hidden="true">
+            <strong>{content.hero.marker}</strong>
+            <span>{content.hero.markerLabel}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-who section-anchor" id="who-we-are">
+      <div class="container about-who__layout">
+        <div class="about-who__copy">
+          <p class="eyebrow">{content.who.eyebrow}</p>
+          <h2>{content.who.heading}</h2>
+          <p class="about-lead">{content.who.lead}</p>
+          <p>{content.who.body}</p>
+        </div>
+        <dl class="about-facts">
+          {content.who.facts.map(([term, description], index) => (
+            <div><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><dt>{term}</dt><dd>{description}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="about-independent section-anchor" id="independent-escrow">
+      <div class="container about-independent__layout">
+        <div class="about-independent__copy">
+          <p class="eyebrow">{content.independent.eyebrow}</p>
+          <h2>{content.independent.heading}</h2>
+          <p class="about-direct-answer">{content.independent.directAnswer}</p>
+          <p>{content.independent.body}</p>
+          <a class="text-link" href={content.independent.sourceHref} target="_blank" rel="noreferrer">{content.independent.sourceLabel} <Arrow /></a>
+        </div>
+        <aside class="about-roles" aria-labelledby="about-roles-heading">
+          <h3 id="about-roles-heading">{content.independent.rolesHeading}</h3>
+          <ul>
+            {content.independent.roles.map(([title, description]) => (
+              <li><strong>{title}</strong><span>{description}</span></li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="about-specialties section-anchor" id="about-specialties">
+      <div class="container">
+        <div class="about-section-heading">
+          <p class="eyebrow">{content.specialties.eyebrow}</p>
+          <h2>{content.specialties.heading}</h2>
+          <p>{content.specialties.intro}</p>
+        </div>
+        <div class="about-specialty-grid">
+          {specialtyCards.map((service) => (
+            <article>
+              <ServiceIcon name={service.icon} />
+              <div>
+                <h3><a href={service.href}>{service.label}</a></h3>
+                <p>{service.description}</p>
+                <a class="text-link" href={service.href}>{content.specialties.actionLabel} <Arrow /></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceQuestions content={content.faq} id="about-faq" groupName="about-faq" />
+
+    <section class="contact-cta about-contact section-anchor" id="about-contact">
+      <div class="contact-architecture" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="container contact-cta__inner">
+        <div>
+          <p class="contact-eyebrow">{content.contact.eyebrow}</p>
+          <h2>{content.contact.heading}</h2>
+          <p>{content.contact.body}</p>
+        </div>
+        <a class="phone-button" href={contactHref}>{content.contact.action} <Arrow /></a>
+      </div>
+    </section>
+  </main>
+  <Footer
+    locale={locale}
+    content={shared.footer}
+    navigation={navigation}
+    services={services}
+    wordmarkLabel={content.wordmarkLabel}
+  />
+  <LanguageSwitcher locale={locale} pageKey="about" label={shared.languageSwitcherLabel} />
+</BaseLayout>

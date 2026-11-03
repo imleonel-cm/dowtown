@@ -1,0 +1,16 @@
+---
+import type { Locale } from '../data/site';
+import { reverseMortgageContent } from '../data/reverseMortgage';
+import SpecialtyPage from './SpecialtyPage.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<SpecialtyPage
+  locale={locale}
+  pageKey="reverseMortgage"
+  content={reverseMortgageContent[locale]}
+  icon="finance"
+  faqGroupName="reverse-mortgage-faq"
+/>

@@ -1,0 +1,16 @@
+---
+import type { Locale } from '../data/site';
+import { manufacturedHomesContent } from '../data/manufacturedHomes';
+import SpecialtyPage from './SpecialtyPage.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<SpecialtyPage
+  locale={locale}
+  pageKey="manufacturedHomes"
+  content={manufacturedHomesContent[locale]}
+  icon="home"
+  faqGroupName="manufactured-homes-faq"
+/>

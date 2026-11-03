@@ -1,0 +1,17 @@
+---
+import type { Locale } from '../data/site';
+import { residentialContent } from '../data/residential';
+import SpecialtyPage from './SpecialtyPage.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<SpecialtyPage
+  locale={locale}
+  pageKey="residential"
+  content={residentialContent[locale]}
+  icon="home"
+  faqGroupName="residential-faq"
+/>
+

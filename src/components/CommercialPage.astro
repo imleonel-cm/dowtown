@@ -1,0 +1,16 @@
+---
+import type { Locale } from '../data/site';
+import { commercialContent } from '../data/commercial';
+import SpecialtyPage from './SpecialtyPage.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<SpecialtyPage
+  locale={locale}
+  pageKey="commercial"
+  content={commercialContent[locale]}
+  icon="commercial"
+  faqGroupName="commercial-faq"
+/>

@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import { implementedPageKeys, routeMap, type Locale, type PageKey } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  pageKey: PageKey;
+  title: string;
+  description: string;
+}
+
+const { locale, pageKey, title, description } = Astro.props;
+if (!Astro.site) throw new Error('Astro site origin is required for canonical and hreflang URLs.');
+
+const canonical = new URL(routeMap[pageKey][locale], Astro.site);
+const hasImplementedPair = implementedPageKeys.some((key) => key === pageKey);
+const alternates = hasImplementedPair
+  ? (['en', 'es'] as const).map((language) => ({
+      language,
+      href: new URL(routeMap[pageKey][language], Astro.site)
+    }))
+  : [];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.language} href={alternate.href} />
+    ))}
+    {hasImplementedPair && <link rel="alternate" hreflang="x-default" href={new URL(routeMap[pageKey].en, Astro.site)} />}
+    <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

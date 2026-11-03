@@ -1,0 +1,43 @@
+---
+import type { HomeContent } from '../../data/site';
+import { Picture } from 'astro:assets';
+import residentialEscrowImage from '../../assets/residential-escrow-illustration.png';
+import Arrow from '../Arrow.astro';
+
+interface Props { content: HomeContent['resource'] }
+const { content } = Astro.props;
+---
+
+<section id="resources" class="resource-section section-anchor">
+  <div class="container">
+    <div class="section-heading-row">
+      <h2>{content.heading}</h2>
+      <a class="text-link" href="#featured-resource">{content.action} <Arrow /></a>
+    </div>
+    <article id="featured-resource" class="resource-card section-anchor">
+      <div class="resource-visual">
+        <Picture
+          src={residentialEscrowImage}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[390, 640, 960, 1280, 1536]}
+          sizes="(max-width: 760px) calc(100vw - 36px), 55vw"
+          width={1536}
+          height={1024}
+          quality={82}
+          alt={content.imageAlt}
+          loading="lazy"
+          decoding="async"
+          pictureAttributes={{ class: 'responsive-picture' }}
+        />
+        <div class="resource-sheet" aria-hidden="true"><span>{content.noteLabel}</span><i></i><i></i><i></i></div>
+      </div>
+      <div class="resource-copy">
+        <p class="eyebrow">{content.eyebrow}</p>
+        <h3>{content.title}</h3>
+        <p>{content.summary}</p>
+        <span class="status-pill">{content.status}</span>
+      </div>
+    </article>
+  </div>
+</section>

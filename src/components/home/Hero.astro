@@ -1,0 +1,64 @@
+---
+import type { HomeContent } from '../../data/site';
+import type { ServiceKey } from '../../data/business';
+import { Picture } from 'astro:assets';
+import residentialEscrowImage from '../../assets/residential-escrow-illustration.png';
+import Arrow from '../Arrow.astro';
+
+interface Props {
+  content: HomeContent['hero'];
+  services: HomeContent['services']['items'];
+  servicesHref: string;
+  serviceHrefs: Partial<Record<ServiceKey, string>>;
+}
+
+const { content, services, servicesHref, serviceHrefs } = Astro.props;
+---
+
+<section id="home" class="hero section-anchor">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hero-kicker"><span aria-hidden="true"></span> {content.kicker}</p>
+      <h1>{content.title} <span>{content.titleAccent}</span></h1>
+      <p>{content.intro}</p>
+      <div class="button-row">
+        <a class="button" href={servicesHref}>{content.primaryCta} <Arrow /></a>
+        <a class="button button--outline" href="#contact">{content.secondaryCta}</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual__backdrop" aria-hidden="true"></div>
+      <figure class="hero-photo">
+        <Picture
+          src={residentialEscrowImage}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[390, 640, 960, 1280, 1536]}
+          sizes="(max-width: 620px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 47vw"
+          width={1536}
+          height={1024}
+          quality={82}
+          alt={content.imageAlt}
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          pictureAttributes={{ class: 'responsive-picture' }}
+        />
+        <figcaption>{content.imageCaption}</figcaption>
+      </figure>
+      <div class="document-stack" aria-hidden="true">
+        <span class="document-stack__tab">{content.documentLabel}</span>
+        <span class="document-stack__line"></span>
+        <span class="document-stack__line document-stack__line--short"></span>
+        <span class="document-stack__seal">✓</span>
+      </div>
+      <nav class="hero-links" aria-label={content.featuredLabel}>
+        {services.slice(0, 3).map((service) => serviceHrefs[service.key] ? (
+          <a href={serviceHrefs[service.key]}>{service.title} <Arrow /></a>
+        ) : (
+          <span>{service.title}</span>
+        ))}
+      </nav>
+    </div>
+  </div>
+</section>
