@@ -7,18 +7,22 @@ interface Props {
   pageKey: PageKey;
   title: string;
   description: string;
+  canonicalPath?: string;
+  alternatePaths?: Partial<Record<Locale, string>>;
 }
 
-const { locale, pageKey, title, description } = Astro.props;
+const { locale, pageKey, title, description, canonicalPath, alternatePaths } = Astro.props;
 if (!Astro.site) throw new Error('Astro site origin is required for canonical and hreflang URLs.');
 
 const basePath = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
-const canonical = new URL(`${basePath}${routeMap[pageKey][locale]}`, Astro.site);
-const hasImplementedPair = implementedPageKeys.some((key) => key === pageKey);
+const canonical = new URL(`${basePath}${canonicalPath ?? routeMap[pageKey][locale]}`, Astro.site);
+const hasImplementedPair = alternatePaths
+  ? Boolean(alternatePaths.en && alternatePaths.es)
+  : implementedPageKeys.some((key) => key === pageKey);
 const alternates = hasImplementedPair
   ? (['en', 'es'] as const).map((language) => ({
       language,
-      href: new URL(`${basePath}${routeMap[pageKey][language]}`, Astro.site)
+      href: new URL(`${basePath}${alternatePaths?.[language] ?? routeMap[pageKey][language]}`, Astro.site)
     }))
   : [];
 ---
@@ -31,12 +35,12 @@ const alternates = hasImplementedPair
     <meta name="robots" content="noindex, nofollow" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="canonical" href={canonical} />
     {alternates.map((alternate) => (
       <link rel="alternate" hreflang={alternate.language} href={alternate.href} />
     ))}
-    {hasImplementedPair && <link rel="alternate" hreflang="x-default" href={new URL(`${basePath}${routeMap[pageKey].en}`, Astro.site)} />}
+    {hasImplementedPair && <link rel="alternate" hreflang="x-default" href={new URL(`${basePath}${alternatePaths?.en ?? routeMap[pageKey].en}`, Astro.site)} />}
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin />
     <title>{title}</title>

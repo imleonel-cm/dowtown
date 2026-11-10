@@ -5,9 +5,10 @@ interface Props {
   locale: Locale;
   pageKey: PageKey;
   label: string;
+  hrefs?: Partial<Record<Locale, string>>;
 }
 
-const { locale, pageKey, label } = Astro.props;
+const { locale, pageKey, label, hrefs } = Astro.props;
 const languages = ['en', 'es'] as const;
 ---
 
@@ -16,7 +17,7 @@ const languages = ['en', 'es'] as const;
     <>
       {index > 0 && <span aria-hidden="true">|</span>}
       <a
-        href={routeMap[pageKey][language]}
+        href={hrefs?.[language] ?? routeMap[pageKey][language]}
         lang={language}
         hreflang={language}
         aria-label={languageOptions[language].accessibleLabel}

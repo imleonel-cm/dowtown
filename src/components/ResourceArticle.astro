@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { business } from '../data/business';
+import { homeContent, routeMap, type Locale } from '../data/site';
+import { navigationFor } from '../data/navigation';
+import { serviceNavigationFor } from '../data/serviceLinks';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Props { locale: Locale; entry: CollectionEntry<'resources'> }
+const { locale, entry } = Astro.props;
+const { Content } = await render(entry);
+const shared = homeContent[locale];
+const navigation = navigationFor(locale, 'resources');
+const services = serviceNavigationFor(locale);
+const resourceHref = routeMap.resources[locale];
+const title = entry.data.title;
+const description = entry.data.description;
+const articlePath = `${resourceHref}${entry.data.slug}/`;
+const alternatePaths = entry.data.translationRef
+  ? (locale === 'en'
+      ? { en: articlePath, es: `${routeMap.resources.es}${entry.data.translationRef}/` }
+      : { en: `${routeMap.resources.en}${entry.data.translationRef}/`, es: articlePath })
+  : undefined;
+---
+
+<BaseLayout locale={locale} pageKey="resources" title={title} description={description} canonicalPath={articlePath} alternatePaths={alternatePaths}>
+  <a class="skip-link" href="#main-content">{shared.skipLink}</a>
+  <Header locale={locale} content={{ ...shared.header, navigation, services }} wordmarkLabel={shared.wordmarkLabel} activePageKey="resources" ctaHref={business.phoneHref} />
+  <main id="main-content">
+    <article class="resource-article section-anchor">
+      <div class="container resource-article__container">
+        <Breadcrumbs label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'} items={[{ label: locale === 'en' ? 'Home' : 'Inicio', href: routeMap.home[locale] }, { label: locale === 'en' ? 'Resources' : 'Recursos', href: resourceHref }, { label: title, href: articlePath }]} />
+        <header class="resource-article__header"><p class="eyebrow">{entry.data.category}</p><time datetime={entry.data.pubDate.toISOString()}>{entry.data.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time><h1>{title}</h1><p>{description}</p>{entry.data.author && <p class="resource-article__author">{entry.data.author}</p>}</header>
+        {entry.data.featuredImage && <img class="resource-article__image" src={entry.data.featuredImage} alt={entry.data.imageAlt ?? title} width="1200" height="720" loading="eager" />}
+        <div class="resource-article__body"><Content /></div>
+        <a class="button" href={routeMap.contact[locale]}>{locale === 'en' ? 'Contact Downtown' : 'Contactar a Downtown'}</a>
+      </div>
+    </article>
+  </main>
+  <Footer locale={locale} content={shared.footer} navigation={navigation} services={services} wordmarkLabel={shared.wordmarkLabel} />
+  <LanguageSwitcher locale={locale} pageKey="resources" label={shared.languageSwitcherLabel} hrefs={alternatePaths} />
+</BaseLayout>

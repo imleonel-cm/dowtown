@@ -5,23 +5,18 @@ const previewBase = '/dowtown';
 const deploymentBase = isPreview ? previewBase : '';
 
 export default defineConfig({
-  site: isPreview
-    ? 'https://imleonel-cm.github.io'
-    : 'https://downtownescrow.net',
-
+  site: isPreview ? 'https://imleonel-cm.github.io' : 'https://downtownescrow.net',
   ...(isPreview ? { base: `${previewBase}/` } : {}),
-
   output: 'static',
   trailingSlash: 'always',
-
   redirects: {
     '/services': {
       status: 302,
-      destination: `${deploymentBase}/#services`,
+      destination: `${deploymentBase}/#services`
     },
     '/es/servicios': {
       status: 302,
-      destination: `${deploymentBase}/es/#services`,
-    },
-  },
+      destination: `${deploymentBase}/es/#services`
+    }
+  }
 });

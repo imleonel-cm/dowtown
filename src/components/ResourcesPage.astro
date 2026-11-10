@@ -1,0 +1,120 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { business } from '../data/business';
+import { homeContent, routeMap, type Locale } from '../data/site';
+import { navigationFor } from '../data/navigation';
+import { serviceNavigationFor } from '../data/serviceLinks';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  locale: Locale;
+  entries: CollectionEntry<'resources'>[];
+}
+
+const { locale, entries } = Astro.props;
+const content = locale === 'en'
+  ? {
+      title: 'Escrow Resources & Insights',
+      description: 'Explore practical articles about escrow, real estate transactions, and the closing process.',
+      eyebrow: 'RESOURCES & INSIGHTS',
+      intro: 'Explore practical articles about escrow, real estate transactions, and the closing process.',
+      breadcrumb: 'Resources',
+      more: 'More Resources',
+      emptyTitle: 'New resources are on the way.',
+      emptyBody: 'This library will collect clear, practical guidance as verified articles are published.',
+      read: 'Read Article',
+      noImage: 'Editorial resource'
+    }
+  : {
+      title: 'Recursos y artículos sobre escrow',
+      description: 'Encuentra información práctica sobre escrow, operaciones inmobiliarias y el proceso de cierre.',
+      eyebrow: 'RECURSOS Y ARTÍCULOS',
+      intro: 'Encuentra información práctica sobre escrow, operaciones inmobiliarias y el proceso de cierre.',
+      breadcrumb: 'Recursos',
+      more: 'Más recursos',
+      emptyTitle: 'Pronto habrá nuevos recursos.',
+      emptyBody: 'Esta biblioteca reunirá orientación clara y práctica a medida que se publiquen artículos verificados.',
+      read: 'Leer artículo',
+      noImage: 'Recurso editorial'
+    };
+
+const navigation = navigationFor(locale, 'resources');
+const services = serviceNavigationFor(locale);
+const shared = homeContent[locale];
+const headerContent = { ...shared.header, navigation, services };
+const homeHref = routeMap.home[locale];
+const resourceHref = routeMap.resources[locale];
+const breadcrumbItems = [
+  { label: locale === 'en' ? 'Home' : 'Inicio', href: homeHref },
+  { label: content.breadcrumb, href: resourceHref }
+];
+const published = entries
+  .filter((entry) => !entry.data.draft && entry.data.language === locale && entry.data.pubDate <= new Date())
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || a.data.slug.localeCompare(b.data.slug));
+const featured = published[0];
+const previous = published.slice(1);
+const articleHref = (entry: CollectionEntry<'resources'>) => `${resourceHref}${entry.data.slug}/`;
+---
+
+<BaseLayout locale={locale} pageKey="resources" title={content.title} description={content.description}>
+  <a class="skip-link" href="#main-content">{shared.skipLink}</a>
+  <Header locale={locale} content={headerContent} wordmarkLabel={shared.wordmarkLabel} activePageKey="resources" ctaHref={business.phoneHref} />
+  <main id="main-content">
+    <section class="resources-hero section-anchor" id="resources-top">
+      <div class="container">
+        <Breadcrumbs label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'} items={breadcrumbItems} />
+        <div class="resources-hero__copy">
+          <p class="eyebrow">{content.eyebrow}</p>
+          <h1>{content.title}</h1>
+          <p>{content.intro}</p>
+        </div>
+      </div>
+    </section>
+
+    {featured ? (
+      <section class="resources-featured section-anchor" id="featured-resource">
+        <div class="container">
+          <div class="resources-featured__layout">
+            <div class="resources-featured__media">
+              {featured.data.featuredImage ? <img src={featured.data.featuredImage} alt={featured.data.imageAlt ?? featured.data.title} width="900" height="620" loading="eager" /> : <span>{content.noImage}</span>}
+            </div>
+            <div class="resources-featured__copy">
+              <p class="eyebrow">{featured.data.category}</p>
+              <time datetime={featured.data.pubDate.toISOString()}>{featured.data.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+              <h2>{featured.data.title}</h2>
+              <p>{featured.data.description}</p>
+              <a class="text-link" href={articleHref(featured)}>{content.read} <Arrow /></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="resources-empty section-anchor" id="featured-resource">
+        <div class="container resources-empty__inner">
+          <p class="eyebrow">{content.eyebrow}</p>
+          <h2>{content.emptyTitle}</h2>
+          <p>{content.emptyBody}</p>
+        </div>
+      </section>
+    )}
+
+    {previous.length > 0 && <section class="resources-list section-anchor" id="more-resources">
+      <div class="container">
+        <div class="resources-section-heading"><p class="eyebrow">{content.eyebrow}</p><h2>{content.more}</h2></div>
+        <div class="resources-grid">
+          {previous.map((entry) => <article class="resource-card">
+            {entry.data.featuredImage && <img src={entry.data.featuredImage} alt={entry.data.imageAlt ?? entry.data.title} width="640" height="420" loading="lazy" />}
+            <div class="resource-card__body"><p class="eyebrow">{entry.data.category}</p><time datetime={entry.data.pubDate.toISOString()}>{entry.data.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time><h3>{entry.data.title}</h3><p>{entry.data.description}</p><a class="text-link" href={articleHref(entry)}>{content.read} <Arrow /></a></div>
+          </article>)}
+        </div>
+      </div>
+    </section>}
+  </main>
+  <Footer locale={locale} content={shared.footer} navigation={navigation} services={services} wordmarkLabel={shared.wordmarkLabel} />
+  <LanguageSwitcher locale={locale} pageKey="resources" label={shared.languageSwitcherLabel} />
+</BaseLayout>

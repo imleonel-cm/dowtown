@@ -42,7 +42,7 @@ export const routeMap: Record<PageKey, Record<Locale, string>> = {
   terms: { en: '/terms-and-conditions/', es: '/es/terminos-y-condiciones/' }
 };
 
-export const implementedPageKeys = ['home', 'about', 'contact', 'manufacturedHomes', 'probate', 'shortSale', 'reverseMortgage', 'residential', 'commercial', 'wholesale', 'privacyPolicy', 'terms'] as const satisfies readonly PageKey[];
+export const implementedPageKeys = ['home', 'about', 'contact', 'resources', 'manufacturedHomes', 'probate', 'shortSale', 'reverseMortgage', 'residential', 'commercial', 'wholesale', 'privacyPolicy', 'terms'] as const satisfies readonly PageKey[];
 
 export const languageNames: Record<Locale, string> = {
   en: 'English',

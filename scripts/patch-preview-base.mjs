@@ -13,8 +13,8 @@ async function visit(dir) {
     else if (/\.(html|css|js|mjs|map)$/i.test(entry.name)) {
       const source = await readFile(target, 'utf8');
       const patched = source
-        .replace(/(href|src|action)="\/(?!\/|dowtown\/)/g, `$1="${base}/`)
-        .replace(/url\("\/(?!\/|dowtown\/)/g, `url("${base}/`)
+        .replace(/(href|src|action)=\"\/(?!\/|dowtown\/)/g, `$1=\"${base}/`)
+        .replace(/url\(\"\/(?!\/|dowtown\/)/g, `url(\"${base}/`)
         .replace(/url\('\/(?!\/|dowtown\/)/g, `url('${base}/`);
       if (patched !== source) await writeFile(target, patched);
     }

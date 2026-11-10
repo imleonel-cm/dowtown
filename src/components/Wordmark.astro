@@ -10,6 +10,5 @@ const { inverse = false, locale, label } = Astro.props;
 ---
 
 <a class:list={['wordmark', { 'wordmark--inverse': inverse }]} href={`${routeMap.home[locale]}#home`} aria-label={label}>
-  <span class="wordmark__name">Downtown</span>
-  <span class="wordmark__descriptor">Community Escrow</span>
+  <img class="wordmark__logo" src={inverse ? '/branding/downtown-logo-white.png' : '/branding/downtown-logo.png'} alt="Downtown Community Escrow" width="420" height="120" decoding="async" />
 </a>

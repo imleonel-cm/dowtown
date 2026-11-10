@@ -1,4 +1,4 @@
 export const featureFlags = {
-  resources: false
+  resources: true
 } as const;
 
