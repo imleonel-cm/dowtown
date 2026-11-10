@@ -43,6 +43,7 @@ const alternates = hasImplementedPair
     {hasImplementedPair && <link rel="alternate" hreflang="x-default" href={new URL(`${basePath}${alternatePaths?.en ?? routeMap[pageKey].en}`, Astro.site)} />}
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
     <title>{title}</title>
   </head>
   <body>

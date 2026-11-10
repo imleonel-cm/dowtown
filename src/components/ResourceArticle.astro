@@ -26,16 +26,30 @@ const alternatePaths = entry.data.translationRef
       ? { en: articlePath, es: `${routeMap.resources.es}${entry.data.translationRef}/` }
       : { en: `${routeMap.resources.en}${entry.data.translationRef}/`, es: articlePath })
   : undefined;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  url: `https://downtownescrow.net${articlePath}`,
+  inLanguage: locale === 'en' ? 'en-US' : 'es-US',
+  publisher: { '@type': 'Organization', name: business.legalName, url: 'https://downtownescrow.net/' }
+};
+if (entry.data.author) Object.assign(articleSchema, { author: { '@type': 'Person', name: entry.data.author } });
+if (entry.data.pubDate) Object.assign(articleSchema, { datePublished: entry.data.pubDate.toISOString() });
+if (entry.data.updatedDate) Object.assign(articleSchema, { dateModified: entry.data.updatedDate.toISOString() });
+if (entry.data.featuredImage) Object.assign(articleSchema, { image: `https://downtownescrow.net${entry.data.featuredImage}` });
 ---
 
-<BaseLayout locale={locale} pageKey="resources" title={title} description={description} canonicalPath={articlePath} alternatePaths={alternatePaths}>
+<BaseLayout locale={locale} pageKey="resources" title={title} description={description} canonicalPath={articlePath} alternatePaths={alternatePaths ?? {}}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
   <a class="skip-link" href="#main-content">{shared.skipLink}</a>
   <Header locale={locale} content={{ ...shared.header, navigation, services }} wordmarkLabel={shared.wordmarkLabel} activePageKey="resources" ctaHref={business.phoneHref} />
   <main id="main-content">
     <article class="resource-article section-anchor">
       <div class="container resource-article__container">
         <Breadcrumbs label={locale === 'en' ? 'Breadcrumb' : 'Ruta de navegación'} items={[{ label: locale === 'en' ? 'Home' : 'Inicio', href: routeMap.home[locale] }, { label: locale === 'en' ? 'Resources' : 'Recursos', href: resourceHref }, { label: title, href: articlePath }]} />
-        <header class="resource-article__header"><p class="eyebrow">{entry.data.category}</p><time datetime={entry.data.pubDate.toISOString()}>{entry.data.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time><h1>{title}</h1><p>{description}</p>{entry.data.author && <p class="resource-article__author">{entry.data.author}</p>}</header>
+        <header class="resource-article__header"><p class="eyebrow">{entry.data.category}</p>{entry.data.pubDate && <time datetime={entry.data.pubDate.toISOString()}>{entry.data.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'es-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>}<h1>{title}</h1><p>{description}</p>{entry.data.author && <p class="resource-article__author">{entry.data.author}</p>}</header>
         {entry.data.featuredImage && <img class="resource-article__image" src={entry.data.featuredImage} alt={entry.data.imageAlt ?? title} width="1200" height="720" loading="eager" />}
         <div class="resource-article__body"><Content /></div>
         <a class="button" href={routeMap.contact[locale]}>{locale === 'en' ? 'Contact Downtown' : 'Contactar a Downtown'}</a>

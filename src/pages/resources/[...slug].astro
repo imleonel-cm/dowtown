@@ -4,7 +4,7 @@ import ResourceArticle from '../../components/ResourceArticle.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('resources');
-  return entries.filter((entry) => !entry.data.draft && entry.data.pubDate <= new Date()).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+  return entries.filter((entry) => !entry.data.draft && entry.data.language === 'en' && (!entry.data.pubDate || entry.data.pubDate <= new Date())).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
 }
 
 const { entry } = Astro.props;
