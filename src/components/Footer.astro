@@ -1,5 +1,6 @@
 ---
 import { business } from '../data/business';
+import { routeMap } from '../data/site';
 import type { HomeContent, Locale } from '../data/site';
 import type { NavigationItem } from '../data/navigation';
 import type { ServiceNavigationItem } from '../data/serviceLinks';
@@ -15,13 +16,16 @@ interface Props {
 
 const { locale, content, navigation, services, wordmarkLabel } = Astro.props;
 const footerNavigation = navigation.filter((item) => item.id !== 'services' && item.href);
+const legalLinks = locale === 'en'
+  ? [{ label: 'Privacy Policy', href: routeMap.privacyPolicy.en }, { label: 'Terms & Conditions', href: routeMap.terms.en }]
+  : [{ label: 'Política de privacidad', href: routeMap.privacyPolicy.es }, { label: 'Términos y condiciones', href: routeMap.terms.es }];
 ---
 
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-intro">
       <Wordmark locale={locale} label={wordmarkLabel} />
-      <p>{content.introLines[0]}<br />{content.introLines[1]}</p>
+      <p>{content.introLines.map((line, index) => <>{index > 0 && <br />}{line}</>)}</p>
     </div>
     <div class="footer-column">
       <h2>{content.exploreHeading}</h2>
@@ -39,11 +43,18 @@ const footerNavigation = navigation.filter((item) => item.id !== 'services' && i
     </div>
     <div class="footer-column footer-contact">
       <h2>{content.contactHeading}</h2>
-      <p><a href={business.phoneHref}>{business.phoneDisplay}</a><br />{business.addressLine}<br />{business.cityLine}</p>
+      <address>
+        <a class="footer-phone" href={business.phoneHref}>{business.phoneDisplay}</a>
+        <span>{business.addressLine}</span>
+        <span>{business.cityLine}</span>
+      </address>
     </div>
   </div>
   <div class="container copyright">
     <span>© {new Date().getFullYear()} {business.legalName}</span>
     <span>{content.copyrightContext}</span>
+  </div>
+  <div class="container footer-legal">
+    {legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}
   </div>
 </footer>

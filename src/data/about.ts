@@ -4,7 +4,7 @@ export const aboutContent = {
   en: {
     meta: {
       title: 'About Downtown Community Escrow | Santa Ana',
-      description: 'Learn about Downtown Community Escrow, an independent escrow company in Santa Ana coordinating six specialized property-transaction services.'
+      description: 'Learn about Downtown Community Escrow, an independent escrow company in Santa Ana coordinating seven specialized property-transaction services.'
     },
     skipLink: 'Skip to main content',
     wordmarkLabel: 'Downtown Community Escrow home',
@@ -26,7 +26,7 @@ export const aboutContent = {
       lead: `${business.legalName} provides independent escrow coordination from its Santa Ana office.`,
       body: 'We coordinate the escrow portion of property transactions by working with the information, documents, funds, and written instructions applicable to the matter. Participants may include buyers, sellers, agents, lenders, personal representatives, and other professionals, each acting within a separate role.',
       facts: [
-        ['Six specialties', 'Manufactured homes, short sales, probate, reverse mortgages, residential, and commercial escrow.'],
+        ['Seven specialties', 'Manufactured homes, short sales, probate, reverse mortgages, residential, commercial, and wholesale escrow.'],
         ['Verified office', `${business.addressLine}, ${business.cityLine}.`],
         ['Direct contact', business.phoneDisplay]
       ]
@@ -58,7 +58,7 @@ export const aboutContent = {
       items: [
         ['What does Downtown Community Escrow do?', 'Downtown coordinates the escrow portion of property transactions by working with the applicable written instructions, documents, funds, and closing conditions. It does not replace lenders, agents, title companies, attorneys, or other advisers.'],
         ['Where is Downtown Community Escrow located?', `${business.legalName} has an office at ${business.addressLine}, ${business.cityLine}.`],
-        ['What types of escrow services does Downtown offer?', 'Downtown has dedicated service pages for manufactured and mobile homes, short sales, probate, reverse mortgages, residential transactions, and commercial real estate transactions. The details and accepted scope of each matter should be confirmed directly with the company.'],
+        ['What types of escrow services does Downtown offer?', 'Downtown has dedicated service pages for manufactured and mobile homes, short sales, probate, reverse mortgages, residential transactions, commercial real estate transactions, and wholesale real estate escrow. The details and accepted scope of each matter should be confirmed directly with the company.'],
         ['What is an independent escrow company?', 'In general, an independent escrow company serves as a neutral escrow holder and is not controlled by another participant in the transaction. The escrow holder follows the written instructions applicable to the matter; lenders, agents, title companies, and advisers keep their separate roles.']
       ]
     },
@@ -72,7 +72,7 @@ export const aboutContent = {
   es: {
     meta: {
       title: 'Nosotros | Downtown Community Escrow en Santa Ana',
-      description: 'Conoce a Downtown Community Escrow, una compañía independiente de escrow en Santa Ana con seis servicios para operaciones especializadas.'
+      description: 'Conoce a Downtown Community Escrow, una compañía independiente de escrow en Santa Ana con siete servicios para operaciones especializadas.'
     },
     skipLink: 'Ir al contenido principal',
     wordmarkLabel: 'Inicio de Downtown Community Escrow',
@@ -94,7 +94,7 @@ export const aboutContent = {
       lead: `${business.legalName} ofrece coordinación independiente de escrow desde su oficina en Santa Ana.`,
       body: 'Coordinamos la parte de escrow de operaciones inmobiliarias mediante la información, los documentos, los fondos y las instrucciones escritas aplicables al caso. Pueden participar compradores, vendedores, agentes, prestamistas, representantes personales y otros profesionales, cada uno dentro de un papel separado.',
       facts: [
-        ['Seis especialidades', 'Casas manufacturadas, short sales, probate, hipotecas inversas, escrow residencial y comercial.'],
+        ['Siete especialidades', 'Casas manufacturadas, short sales, probate, hipotecas inversas, escrow residencial, comercial y wholesale.'],
         ['Oficina verificada', `${business.addressLine}, ${business.cityLine}.`],
         ['Contacto directo', business.phoneDisplay]
       ]

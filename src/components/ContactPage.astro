@@ -86,34 +86,12 @@ const breadcrumbItems = [
           <p class="contact-safety">{content.message.safety}</p>
           <a class="text-link" href={business.phoneHref}>{content.message.callAction} <Arrow /></a>
         </div>
-        <form class="contact-form" aria-describedby="contact-form-status">
-          <fieldset disabled>
-            <legend class="sr-only">{content.message.eyebrow}</legend>
-            <div class="contact-form__grid">
-              <label>
-                <span>{content.message.fields.name}</span>
-                <input type="text" name="name" autocomplete="name" required />
-              </label>
-              <label>
-                <span>{content.message.fields.phone}</span>
-                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required />
-              </label>
-              <label class="contact-form__wide">
-                <span>{content.message.fields.service}</span>
-                <select name="service" required>
-                  <option value="">{content.message.fields.servicePlaceholder}</option>
-                  {content.message.topics.map((topic) => <option value={topic}>{topic}</option>)}
-                </select>
-              </label>
-              <label class="contact-form__wide">
-                <span>{content.message.fields.message}</span>
-                <textarea name="message" rows="5" required></textarea>
-              </label>
-            </div>
-            <button class="button contact-form__submit" type="submit">{content.message.fields.submit}</button>
-          </fieldset>
-          <p id="contact-form-status" class="contact-form__status" role="status">{content.message.status}</p>
-        </form>
+        <div class="contact-direct__panel">
+          <span class="contact-direct__label">{content.message.callLabel}</span>
+          <a class="contact-direct__phone" href={business.phoneHref}>{business.phoneDisplay}</a>
+          <a class="button" href={business.phoneHref}>{content.message.callAction} <Arrow /></a>
+          <p class="contact-direct__note">{content.message.note}</p>
+        </div>
       </div>
     </section>
 

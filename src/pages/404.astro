@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import { homeContent, routeMap } from '../data/site';
+import { navigationFor } from '../data/navigation';
+import { serviceNavigationFor } from '../data/serviceLinks';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import Arrow from '../components/Arrow.astro';
+
+const locale = 'en';
+const content = homeContent[locale];
+const navigation = navigationFor(locale, 'home');
+const services = serviceNavigationFor(locale);
+const headerContent = { ...content.header, navigation, services };
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Downtown Community Escrow page not found." />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin />
+    <title>Page Not Found | Downtown Community Escrow</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <Header locale={locale} content={headerContent} wordmarkLabel={content.wordmarkLabel} activePageKey="home" ctaHref={routeMap.contact.en} />
+    <main id="main-content">
+      <section class="error-page section-anchor" id="page-not-found">
+        <div class="container error-page__inner">
+          <p class="eyebrow">404 — PAGE NOT FOUND</p>
+          <h1>We Couldn't Find That Page.</h1>
+          <p>The page you're looking for may have moved or may no longer be available. You can return to our homepage or explore our escrow services.</p>
+          <div class="button-row">
+            <a class="button" href={routeMap.home.en}>Back to Home <Arrow /></a>
+            <a class="button button--outline" href="/#services">Explore Services <Arrow /></a>
+          </div>
+          <p class="error-page__language">Looking for Spanish? <a class="text-link" href={routeMap.home.es}>Visita el inicio en español <Arrow /></a></p>
+        </div>
+      </section>
+    </main>
+    <Footer locale={locale} content={content.footer} navigation={navigation} services={services} wordmarkLabel={content.wordmarkLabel} />
+    <LanguageSwitcher locale={locale} pageKey="home" label={content.languageSwitcherLabel} />
+  </body>
+</html>

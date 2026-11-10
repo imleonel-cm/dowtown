@@ -10,11 +10,12 @@ interface Props {
   content: FaqContent;
   id?: string;
   groupName?: string;
+  className?: string;
 }
-const { content, id = 'services-faq', groupName = id } = Astro.props;
+const { content, id = 'services-faq', groupName = id, className } = Astro.props;
 ---
 
-<section id={id} class="services-faq section-anchor">
+<section id={id} class:list={['services-faq', 'section-anchor', className]}>
   <div class="container faq-layout">
     <div class="questions-heading">
       <p class="eyebrow">{content.eyebrow}</p>

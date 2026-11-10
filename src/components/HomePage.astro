@@ -28,12 +28,12 @@ const serviceHrefs = serviceHrefsFor(locale);
   <a class="skip-link" href="#main-content">{content.skipLink}</a>
   <Header locale={locale} content={headerContent} wordmarkLabel={content.wordmarkLabel} activePageKey="home" ctaHref={routeMap.contact[locale]} />
   <main id="main-content">
-    <Hero content={content.hero} services={content.services.items} servicesHref={servicesHref} serviceHrefs={serviceHrefs} />
-    <Services content={content.services} servicesHref={servicesHref} serviceHrefs={serviceHrefs} />
+    <Hero content={content.hero} servicesHref={servicesHref} contactHref={routeMap.contact[locale]} serviceHrefs={serviceHrefs} />
+    <Services content={content.services} serviceHrefs={serviceHrefs} />
     <Office content={content.why} />
     <Questions content={content.questions} />
     {featureFlags.resources && <Resource content={content.resource} />}
-    <ContactCta content={content.contact} />
+    <ContactCta content={content.contact} locale={locale} />
   </main>
   <Footer locale={locale} content={content.footer} navigation={navigation} services={serviceNavigation} wordmarkLabel={content.wordmarkLabel} />
   <LanguageSwitcher locale={locale} pageKey="home" label={content.languageSwitcherLabel} />

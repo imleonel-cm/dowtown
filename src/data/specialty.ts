@@ -8,6 +8,7 @@ export type SpecialtyContent = {
   hero: {
     eyebrow: string;
     heading: string;
+    message?: string;
     intro: string;
     primaryCta: string;
     secondaryCta: string;
@@ -55,6 +56,8 @@ export type SpecialtyContent = {
     intro: string;
     linkLabel: string;
     items: readonly { title: string; href: string; description: string }[];
+    contextualLink?: { label: string; href: string; description: string };
+    contextualLinks?: readonly { label: string; href: string; description: string }[];
   };
   contact: {
     eyebrow: string;

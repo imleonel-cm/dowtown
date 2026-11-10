@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { implementedPageKeys, routeMap, withBasePath, type Locale, type PageKey } from '../data/site';
+import { implementedPageKeys, routeMap, type Locale, type PageKey } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -12,19 +12,15 @@ interface Props {
 const { locale, pageKey, title, description } = Astro.props;
 if (!Astro.site) throw new Error('Astro site origin is required for canonical and hreflang URLs.');
 
-const canonical = new URL(routeMap[pageKey][locale], Astro.site);
+const basePath = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonical = new URL(`${basePath}${routeMap[pageKey][locale]}`, Astro.site);
 const hasImplementedPair = implementedPageKeys.some((key) => key === pageKey);
 const alternates = hasImplementedPair
   ? (['en', 'es'] as const).map((language) => ({
       language,
-      href: new URL(routeMap[pageKey][language], Astro.site)
+      href: new URL(`${basePath}${routeMap[pageKey][language]}`, Astro.site)
     }))
   : [];
-const faviconHref = withBasePath('/favicon.svg');
-const font400Href = withBasePath('/fonts/poppins-400.woff2');
-const font500Href = withBasePath('/fonts/poppins-500.woff2');
-const font600Href = withBasePath('/fonts/poppins-600.woff2');
-const font700Href = withBasePath('/fonts/poppins-700.woff2');
 ---
 
 <!doctype html>
@@ -35,20 +31,14 @@ const font700Href = withBasePath('/fonts/poppins-700.woff2');
     <meta name="robots" content="noindex, nofollow" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" href={faviconHref} type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     {alternates.map((alternate) => (
       <link rel="alternate" hreflang={alternate.language} href={alternate.href} />
     ))}
-    {hasImplementedPair && <link rel="alternate" hreflang="x-default" href={new URL(routeMap[pageKey].en, Astro.site)} />}
-    <link rel="preload" href={font400Href} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={font700Href} as="font" type="font/woff2" crossorigin />
-    <style is:inline set:html={`
-      @font-face{font-family:"Poppins";src:url("${font400Href}") format("woff2");font-style:normal;font-weight:400;font-display:swap}
-      @font-face{font-family:"Poppins";src:url("${font500Href}") format("woff2");font-style:normal;font-weight:500;font-display:swap}
-      @font-face{font-family:"Poppins";src:url("${font600Href}") format("woff2");font-style:normal;font-weight:600;font-display:swap}
-      @font-face{font-family:"Poppins";src:url("${font700Href}") format("woff2");font-style:normal;font-weight:700;font-display:swap}
-    `} />
+    {hasImplementedPair && <link rel="alternate" hreflang="x-default" href={new URL(`${basePath}${routeMap[pageKey].en}`, Astro.site)} />}
+    <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
   </head>
   <body>

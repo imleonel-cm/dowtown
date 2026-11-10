@@ -1,0 +1,8 @@
+---
+import type { Locale } from '../data/site';
+import { wholesaleContent } from '../data/wholesale';
+import SpecialtyPage from './SpecialtyPage.astro';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+<SpecialtyPage locale={locale} pageKey="wholesale" content={wholesaleContent[locale]} icon="commercial" faqGroupName="wholesale-faq" />

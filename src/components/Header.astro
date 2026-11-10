@@ -57,9 +57,9 @@ const { locale, content, wordmarkLabel, activePageKey, activeSectionKey, ctaHref
                 <li>
                   {service.href ? (
                     <a
-                      class:list={{ active: service.pageKey === activePageKey }}
+                      class:list={{ active: service.activePageKey === activePageKey }}
                       href={service.href}
-                      aria-current={service.pageKey === activePageKey ? 'page' : undefined}
+                      aria-current={service.activePageKey === activePageKey ? 'page' : undefined}
                     >{service.label}</a>
                   ) : (
                     <span class="services-submenu__pending">

@@ -1,0 +1,99 @@
+---
+import type { ServiceCatalogKey } from '../data/business';
+
+interface Props { name: ServiceCatalogKey }
+const { name } = Astro.props;
+const plateId = `catalog-plate-${name}`;
+const faceId = `catalog-face-${name}`;
+const sideId = `catalog-side-${name}`;
+---
+
+<svg class={`service-card-icon service-card-icon--${name}`} viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id={plateId} x1="13" y1="8" x2="64" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff" />
+      <stop offset=".58" stop-color="#eef5ff" />
+      <stop offset="1" stop-color="#cad9f8" />
+    </linearGradient>
+    <linearGradient id={faceId} x1="25" y1="20" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5f83dc" />
+      <stop offset="1" stop-color="#242a7a" />
+    </linearGradient>
+    <linearGradient id={sideId} x1="31" y1="28" x2="57" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b9d9ff" />
+      <stop offset="1" stop-color="#7398e8" />
+    </linearGradient>
+  </defs>
+  <rect class="service-card-icon__depth" x="11" y="13" width="58" height="57" rx="19" />
+  <rect class="service-card-icon__plate" x="8" y="7" width="58" height="58" rx="19" fill={`url(#${plateId})`} />
+  <path class="service-card-icon__shine" d="M19 16c8-7 24-9 36-3" />
+
+  {name === 'residential' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m24 39 17-14 14 10v19H24z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="m20 37 18-15 15 12-3 4-12-9-14 12z" fill={`url(#${faceId})`} />
+      <path class="icon-line" d="M28 39v16h21V37M35 55V44h8v11" />
+      <path class="icon-highlight" d="M27 39 38 29l11 8" />
+    </g>
+  )}
+  {name === 'commercial' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m28 23 23 5v28l-23 3z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="M22 20h24v37H22z" fill={`url(#${faceId})`} />
+      <path class="icon-line icon-line--light" d="M28 27h5m6 0h3M28 34h5m6 0h3M28 41h5m6 0h3M34 57V47h7v10" />
+      <path class="icon-line" d="M19 58h36" />
+    </g>
+  )}
+  {name === 'probate' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m29 22 25 6v31l-25-3z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="M23 19h24l7 7v29H23z" fill={`url(#${faceId})`} />
+      <path class="icon-line icon-line--light" d="M46 19v9h8M29 34h16M29 40h12" />
+      <circle class="icon-seal" cx="42" cy="49" r="7" />
+      <path class="icon-line icon-line--light" d="m39 49 2 2 4-5" />
+    </g>
+  )}
+  {name === 'manufacturedHomes' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m24 34 30 4v17l-30 3z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="M20 31h29v25H20z" fill={`url(#${faceId})`} />
+      <path class="icon-line icon-line--light" d="M26 38h8v7h-8zm14 0h4v18M34 56V46h9v10" />
+      <path class="icon-line" d="M18 58h38M22 28h29" />
+    </g>
+  )}
+  {name === 'mobileHomes' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m27 32 29 4v17l-29 3z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="M18 29h33v25H18z" fill={`url(#${faceId})`} />
+      <path class="icon-line icon-line--light" d="M24 36h9v7h-9zm15 0h6v18M34 54V44h10v10" />
+      <path class="icon-line" d="M17 55h40M51 38h5v11" />
+      <circle class="icon-wheel" cx="27" cy="58" r="4" />
+      <circle class="icon-wheel" cx="47" cy="58" r="4" />
+    </g>
+  )}
+  {name === 'shortSales' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m28 22 25 6v31l-25-3z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="M22 19h24l7 7v29H22z" fill={`url(#${faceId})`} />
+      <path class="icon-line icon-line--light" d="M46 19v9h7M29 35h16M29 41h11M29 47h8" />
+      <path class="icon-line" d="m42 50 5 5 10-12" />
+    </g>
+  )}
+  {name === 'reverseMortgage' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m23 39 16-13 14 10v19H23z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="m19 37 18-15 15 12-3 4-12-9-14 12z" fill={`url(#${faceId})`} />
+      <path class="icon-line" d="M27 40v15h19V38M34 55V45h7v10" />
+      <path class="icon-paper" d="M45 20h11l5 5v17H47" />
+      <path class="icon-line icon-line--blue" d="M56 20v6h5M51 31h6M51 36h6" />
+    </g>
+  )}
+  {name === 'wholesale' && (
+    <g class="service-card-icon__art">
+      <path class="icon-side" d="m24 26 20 3v23l-20 3z" fill={`url(#${sideId})`} />
+      <path class="icon-face" d="M19 23h20v30H19z" fill={`url(#${faceId})`} />
+      <path class="icon-line icon-line--light" d="M25 31h8M25 37h8M29 53V43h6v10" />
+      <path class="icon-line" d="M43 31h14m0 0-5-5m5 5-5 5M57 47H43m0 0 5-5m-5 5 5 5" />
+    </g>
+  )}
+</svg>

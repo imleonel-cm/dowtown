@@ -1,250 +1,30 @@
-import type { Locale } from './site';
 import type { SpecialtyContent } from './specialty';
 
 export const residentialContent = {
   en: {
-    meta: {
-      title: 'Residential Escrow Services | Downtown',
-      description: 'Learn how residential escrow coordinates home purchases and sales, what may affect closing, and what to discuss with Downtown.'
-    },
-    skipLink: 'Skip to main content',
-    wordmarkLabel: 'Downtown Community Escrow home',
-    breadcrumbLabel: 'Breadcrumb',
-    breadcrumbHome: 'Home',
-    breadcrumbCurrent: 'Residential Escrow',
-    hero: {
-      eyebrow: 'Residential escrow',
-      heading: 'Residential Escrow Services',
-      intro: 'Downtown coordinates closing escrow for residential home purchases and sales. Start with the property location, buyer/seller roles, and any loan or title details you have.',
-      primaryCta: 'Discuss residential escrow',
-      secondaryCta: 'Compare specialties',
-      marker: 'RE',
-      markerLabel: 'Specialty 05'
-    },
-    index: {
-      label: 'On this page',
-      items: [
-        ['What this service covers', 'service-overview'],
-        ['What can vary', 'transaction-variables'],
-        ['Prepare for a conversation', 'prepare'],
-        ['Useful information', 'consultation-information'],
-        ['Questions', 'specialty-faq'],
-        ['Related sources', 'related-sources']
-      ]
-    },
-    overview: {
-      eyebrow: 'Clear starting point',
-      heading: 'Residential escrow coordinates the transfer of funds and documents for home purchases and sales.',
-      lead: 'This page is for buyers, sellers, agents, lenders, and other participants who want to discuss residential escrow with Downtown.',
-      body: 'Downtown acts as a neutral third‑party holder of funds, documents, and instructions until every contractual condition is satisfied. We do not provide loan, title, or legal advice.',
-      boundaryHeading: 'Escrow does not replace',
-      boundaries: [
-        ['Real estate representation', 'Agents negotiate price and terms; escrow does not represent any party.' ],
-        ['Loan decisions', 'Lenders determine financing eligibility and approve loans.' ],
-        ['Title insurance', 'Title insurers handle title work and issue policies.' ],
-        ['Legal or tax advice', 'Qualified attorneys or tax professionals should be consulted for legal or tax matters.']
-      ]
-    },
-    variables: {
-      eyebrow: 'Transaction context',
-      heading: 'What can change from one residential transaction to another',
-      intro: 'Details vary by property type, financing, and local requirements.',
-      items: [
-        ['Property type', 'Single‑family, condo, townhome, or multi‑unit can affect documentation and requirements.' ],
-        ['Financing', 'Whether the transaction is a purchase, refinance, or cash sale changes the paperwork and timing.' ],
-        ['Location', 'County requirements and recording offices can differ. Share the property city and state so Downtown can confirm whether and how it may assist.' ],
-        ['Participating parties', 'Buyers, sellers, agents, lenders, and title professionals each have roles that affect the escrow timeline.' ]
-      ]
-    },
-    prepare: {
-      eyebrow: 'Prepare for the conversation',
-      heading: 'A useful path to an initial consultation',
-      intro: 'Use these questions to organize the first conversation. They do not describe Downtown’s internal workflow.',
-      items: [
-        ['What is part of the transaction?', 'Identify whether it is a purchase, sale, or refinance and any land involvement.' ],
-        ['Where is the property?', 'Provide city and state so jurisdiction‑specific questions can be addressed.' ],
-        ['What information is available?', 'Share any known title, loan, or inspection documents.' ],
-        ['Who is involved and what comes next?', 'List the participants (buyer, seller, agent, lender) and ask what information is needed for the next step.' ]
-      ]
-    },
-    information: {
-      eyebrow: 'First consultation',
-      heading: 'Information that may be useful to have',
-      intro: 'This is an orientation list, not a mandatory document checklist.',
-      items: [
-        'Property address and legal description',
-        'Type of transaction (purchase, sale, refinance)',
-        'Roles of participants',
-        'Any existing loan payoff demands',
-        'Title or registration information available',
-        'Any wire-instruction information already received',
-        'Questions and dates currently being considered'
-      ]
-    },
-    faq: {
-      eyebrow: 'Specialty questions',
-      heading: 'Questions before you call',
-      intro: 'Short answers for preparing a residential escrow conversation.',
-      items: [
-        ['What is residential escrow?', 'A neutral, short‑term trust where an escrow company holds funds and documents until all contract conditions are met.' ],
-        ['Who chooses the escrow company?', 'Both buyer and seller must agree in writing; traditionally the seller selects, but the contract can specify otherwise.' ],
-        ['What does an escrow officer do?', 'Coordinates the closing, holds earnest money, orders title reports, verifies good funds, and records documents at the county recorder.' ],
-        ['How does escrow differ from an escrow account for taxes?', 'Closing escrow is a one‑time transaction; an escrow account (impound) is a post‑closing account for taxes and insurance managed by a loan servicer.' ],
-        ['What can delay a residential escrow closing?', 'Late loan conditions, appraisal issues, title clouds, slow responses to contingencies, and wire‑transfer verification problems.' ]
-      ]
-    },
-    sources: {
-      eyebrow: 'Related sources',
-      heading: 'Context used for this page',
-      intro: 'These independent sources provide background information. They are not endorsements of Downtown.',
-      linkLabel: 'Visit source',
-      items: [
-        {
-          title: 'California DRE – The Escrow Process',
-          href: 'https://www.dre.ca.gov/files/pdf/escrow_info_consumers.pdf',
-          description: 'California DRE consumer background on escrow fundamentals, written instructions, participant roles, funding, recording, and fraud awareness.'
-        },
-        {
-          title: 'California DFPI – Escrow Consumer Information',
-          href: 'https://dfpi.ca.gov/regulated-industries/escrow-law/consumer-information-escrow/',
-          description: 'California consumer background on independent and controlled escrow. It does not verify Downtown’s license, scope, or procedures.'
-        },
-        {
-          title: 'CFPB – Owning a Home',
-          href: 'https://www.consumerfinance.gov/owning-a-home/',
-          description: 'Federal guidance on home buying, escrow, and related consumer protections.'
-        }
-      ]
-    },
-    contact: {
-      eyebrow: 'Discuss your transaction',
-      heading: 'Start with the property and the questions you have.',
-      body: 'Call Downtown Community Escrow to discuss the property, the transaction, and the information currently available.',
-      homeContact: 'Home contact information',
-      callLabel: 'Call Downtown Community Escrow at (714) 265-7116'
-    }
+    meta: { title: 'Residential Escrow Services | Downtown', description: 'Learn what residential escrow does, what can affect a home closing, and what to discuss with Downtown Community Escrow.' },
+    skipLink: 'Skip to main content', wordmarkLabel: 'Downtown Community Escrow home', breadcrumbLabel: 'Breadcrumb', breadcrumbHome: 'Home', breadcrumbCurrent: 'Residential Escrow',
+    hero: { eyebrow: 'RESIDENTIAL ESCROW · SANTA ANA, CA', heading: 'Residential Escrow Services', message: 'A Clearer Path From Contract to Closing.', intro: 'Buying or selling a home involves more than signing documents. Downtown Community Escrow coordinates funds, documents, and closing instructions for residential real estate transactions.', primaryCta: 'Discuss Your Escrow', secondaryCta: 'How Escrow Works', marker: 'RE', markerLabel: 'Specialty 05' },
+    index: { label: 'On this page', items: [['What Residential Escrow Does', 'service-overview'], ['Closing Requirements', 'transaction-variables'], ['Prepare for Your Escrow', 'prepare'], ['Questions', 'specialty-faq'], ['Helpful Resources', 'related-sources']] },
+    overview: { eyebrow: 'What residential escrow does', heading: 'What Does Residential Escrow Actually Do?', lead: "Residential escrow acts as a neutral third party during a home purchase or sale. It holds funds and documents and helps coordinate the closing according to the parties' escrow instructions.", body: 'Downtown coordinates the exchange of closing information while the other professionals retain their own responsibilities. The escrow holder does not replace the real estate agent, lender, title insurer, or legal and tax advisers.', boundaryHeading: 'Escrow does not replace', boundaries: [['Real estate representation', 'Agents negotiate price and terms; escrow does not represent any party.'], ['Loan decisions', 'Lenders determine financing eligibility and approve loans.'], ['Title insurance', 'Title insurers handle title work and issue policies.'], ['Legal or tax advice', 'Qualified attorneys or tax professionals should be consulted for those matters.']] },
+    variables: { eyebrow: 'Closing requirements', heading: 'Every Closing Has Its Own Requirements.', intro: 'The property, financing, documents, and parties involved can affect what needs to happen before an escrow closes.', items: [['Property Type', 'The nature of the property and its documentation can affect closing requirements.'], ['Financing', 'Lender conditions and instructions may influence the process when financing is involved.'], ['Location', 'Applicable records and requirements can vary by property location.'], ['Participating Parties', 'Coordination depends on the parties and professionals involved in the transaction.']] },
+    prepare: { eyebrow: 'Prepare for your escrow', heading: 'Getting Ready to Discuss Your Escrow?', intro: 'A few details about the property and transaction can help us understand your inquiry.', items: [['The Property', 'Address and property type.'], ['The Transaction', 'Purchase, sale, or another applicable transaction.'], ['The Parties', 'Buyer, seller, and professional contacts, if available.'], ['Your Questions', 'Anything you need clarified before moving forward.']] },
+    information: { eyebrow: 'Preparation note', heading: 'Information for an initial conversation.', intro: 'Information for an initial conversation, not a mandatory document checklist.', items: [] },
+    faq: { eyebrow: 'Residential FAQs', heading: 'Questions Before You Call', intro: 'Clear answers for preparing a residential escrow conversation.', items: [['What is residential escrow?', 'Residential escrow is a neutral arrangement in which an escrow company holds funds and documents while the parties complete the conditions for a home purchase or sale.'], ['Who chooses the escrow company?', 'The parties can agree on the escrow company through their transaction documents; the choice should not be assumed to belong to one party in every transaction.'], ['What does an escrow officer do?', 'An escrow officer follows the parties’ written instructions, coordinates documents and funds, and communicates with the participants as closing requirements are addressed.'], ['How is closing escrow different from an escrow account for taxes?', 'Closing escrow is the transaction that moves a purchase or sale to closing. An impound or mortgage escrow account is maintained by a loan servicer for items such as property taxes and insurance.'], ['What can delay a residential escrow closing?', 'Missing information, unresolved title or financing conditions, incomplete instructions, delayed responses, or verification issues can affect timing. No single timeline applies to every transaction.']] },
+    sources: { eyebrow: 'Helpful escrow resources', heading: 'Helpful Escrow Resources', intro: 'These independent sources provide general information. They are not endorsements of Downtown.', linkLabel: 'Visit source', items: [{ title: 'California DRE – The Escrow Process', href: 'https://www.dre.ca.gov/files/pdf/escrow_info_consumers.pdf', description: 'California DRE consumer background on escrow fundamentals, written instructions, participant roles, funding, recording, and fraud awareness.' }, { title: 'California DFPI – Escrow Consumer Information', href: 'https://dfpi.ca.gov/regulated-industries/escrow-law/consumer-information-escrow/', description: 'California consumer background on independent and controlled escrow. It does not verify Downtown’s license, scope, or procedures.' }, { title: 'CFPB – Owning a Home', href: 'https://www.consumerfinance.gov/owning-a-home/', description: 'Federal guidance on home buying, escrow, and related consumer protections.' }] },
+    contact: { eyebrow: 'READY TO DISCUSS YOUR TRANSACTION?', heading: 'Have a Residential Escrow Question?', body: 'Contact Downtown Community Escrow to discuss your property and the transaction you are working on.', homeContact: 'Home contact information', callLabel: 'Call Downtown Community Escrow at (714) 265-7116' }
   },
   es: {
-    meta: {
-      title: 'Servicios de Escrow Residencial | Downtown',
-      description: 'Conoce cómo el escrow residencial coordina compraventas de viviendas, qué puede afectar el cierre y qué consultar con Downtown.'
-    },
-    skipLink: 'Ir al contenido principal',
-    wordmarkLabel: 'Inicio de Downtown Community Escrow',
-    breadcrumbLabel: 'Ruta de navegación',
-    breadcrumbHome: 'Inicio',
-    breadcrumbCurrent: 'Escrow residencial',
-    hero: {
-      eyebrow: 'Escrow residencial',
-      heading: 'Servicios de Escrow Residencial',
-      intro: 'Downtown coordina el escrow de cierre para la compra y venta de viviendas residenciales. Comience indicando la ubicación, los roles y cualquier detalle de préstamo o título que tenga.',
-      primaryCta: 'Consulta el escrow residencial',
-      secondaryCta: 'Comparar especialidades',
-      marker: 'ER',
-      markerLabel: 'Especialidad 05'
-    },
-    index: {
-      label: 'En esta página',
-      items: [
-        ['Qué cubre este servicio', 'service-overview'],
-        ['Qué puede variar', 'transaction-variables'],
-        ['Prepárate para conversar', 'prepare'],
-        ['Información útil', 'consultation-information'],
-        ['Preguntas', 'specialty-faq'],
-        ['Fuentes relacionadas', 'related-sources']
-      ]
-    },
-    overview: {
-      eyebrow: 'Punto de partida claro',
-      heading: 'Escrow residencial coordina la transferencia de fondos y documentos para la compra y venta de viviendas.',
-      lead: 'Esta página es para compradores, vendedores, agentes, prestamistas y demás participantes que deseen conversar sobre escrow residencial con Downtown.',
-      body: 'Downtown actúa como tercero neutral que retiene fondos, documentos e instrucciones hasta que se cumplan todas las condiciones contractuales. No ofrecemos asesoría de préstamo, título o legal.',
-      boundaryHeading: 'Escrow no sustituye',
-      boundaries: [
-        ['Representación inmobiliaria', 'Los agentes negocian precio y términos; escrow no representa a ninguna parte.' ],
-        ['Decisiones de préstamo', 'Los prestamistas determinan la elegibilidad y aprueban los préstamos.' ],
-        ['Seguro de título', 'Las aseguradoras de título manejan el trabajo de título y emiten pólizas.' ],
-        ['Asesoría legal o fiscal', 'Los abogados o profesionales fiscales calificados deben atender esas áreas.' ]
-      ]
-    },
-    variables: {
-      eyebrow: 'Contexto de la operación',
-      heading: 'Qué puede cambiar de una transacción residencial a otra',
-      intro: 'Los detalles varían según el tipo de propiedad, financiamiento y requisitos locales.',
-      items: [
-        ['Tipo de propiedad', 'Una casa unifamiliar, condominio o townhome puede afectar la documentación requerida.' ],
-        ['Financiamiento', 'Si es compra, refinanciamiento o venta en efectivo cambia la papelería y el calendario.' ],
-        ['Ubicación', 'Los requisitos del condado y las oficinas de registro pueden diferir. Comparte la ciudad y el estado para que Downtown confirme si puede ayudar y de qué manera.' ],
-        ['Partes participantes', 'Comprador, vendedor, agente, prestamista y profesionales de título influyen en el cronograma de escrow.' ]
-      ]
-    },
-    prepare: {
-      eyebrow: 'Prepárate para la conversación',
-      heading: 'Un recorrido útil para la primera consulta',
-      intro: 'Use estas preguntas para organizar la primera conversación. No describen el proceso interno de Downtown.',
-      items: [
-        ['¿Qué incluye la transacción?', 'Identifique si es una compra, venta o refinanciamiento y si hay terreno incluido.' ],
-        ['¿Dónde está la propiedad?', 'Proporcione la ciudad y el estado para que se consideren preguntas específicas de la jurisdicción.' ],
-        ['¿Qué información está disponible?', 'Comparta cualquier título, documento de préstamo o inspección que tenga.' ],
-        ['¿Quién participa y qué sigue?', 'Enumere los participantes (comprador, vendedor, agente, prestamista) y pregunte qué información se necesita para el siguiente paso.' ]
-      ]
-    },
-    information: {
-      eyebrow: 'Primera consulta',
-      heading: 'Información que puede ser útil tener',
-      intro: 'Esta es una lista orientativa, no obligatoria.',
-      items: [
-        'Dirección y descripción legal de la propiedad',
-        'Tipo de transacción (compra, venta, refinanciamiento)',
-        'Roles de los participantes',
-        'Demandas de pago de préstamos existentes',
-        'Información de título o registro disponible',
-        'Información sobre transferencias bancarias ya recibida',
-        'Preguntas y fechas que se estén considerando'
-      ]
-    },
-    faq: {
-      eyebrow: 'Preguntas de la especialidad',
-      heading: 'Preguntas antes de llamar',
-      intro: 'Respuestas breves para preparar una conversación sobre escrow residencial.',
-      items: [
-        ['¿Qué es escrow residencial?', 'Un acuerdo fiduciario neutral y a corto plazo donde una compañía de escrow retiene fondos y documentos hasta que se cumplan todas las condiciones del contrato de compra o venta.' ],
-        ['¿Quién elige la compañía de escrow?', 'Ambas partes deben acordarlo por escrito; tradicionalmente el vendedor selecciona, pero el contrato puede especificar lo contrario.' ],
-        ['¿Qué hace un oficial de escrow?', 'Coordina el cierre, mantiene el depósito de garantía, ordena informes de título preliminares, verifica fondos buenos, y registra documentos en la oficina del registrador del condado.' ],
-        ['¿Cómo se diferencia el escrow de cierre de una cuenta de escrow para impuestos?', 'El escrow de cierre es una transacción única; una cuenta de escrow (impound) es una cuenta posterior al cierre manejada por el servicer del préstamo para impuestos y seguros.' ],
-        ['¿Qué puede retrasar un cierre de escrow residencial?', 'Condiciones de préstamo tardías, disputas de tasación, nubes en el título, respuestas lentas a contingencias y problemas de verificación de transferencias bancarias.' ]
-      ]
-    },
-    sources: {
-      eyebrow: 'Fuentes relacionadas',
-      heading: 'Contexto usado para esta página',
-      intro: 'Estas fuentes independientes brindan información de fondo. No son avales de Downtown.',
-      linkLabel: 'Visitar fuente',
-      items: [
-        {
-          title: 'California DRE – El proceso de escrow',
-          href: 'https://www.dre.ca.gov/files/pdf/escrow_info_consumers.pdf',
-          description: 'Contexto para consumidores de California DRE sobre fundamentos de escrow, instrucciones escritas, participantes, fondos, registro y prevención de fraude.'
-        },
-        {
-          title: 'California DFPI – Información al consumidor sobre escrow',
-          href: 'https://dfpi.ca.gov/regulated-industries/escrow-law/consumer-information-escrow/',
-          description: 'Contexto para consumidores de California sobre escrow independiente y controlado. No verifica la licencia, alcance o procedimientos de Downtown.'
-        },
-        {
-          title: 'CFPB – Ser propietario de una vivienda',
-          href: 'https://www.consumerfinance.gov/owning-a-home/',
-          description: 'Orientación federal sobre compra de vivienda, escrow y protecciones al consumidor.'
-        }
-      ]
-    },
-    contact: {
-      eyebrow: 'Discuta su transacción',
-      heading: 'Comience con la propiedad y las preguntas que tiene.',
-      body: 'Llame a Downtown Community Escrow para conversar sobre la propiedad, la transacción y la información disponible.',
-      homeContact: 'Información de contacto principal',
-      callLabel: 'Llame a Downtown Community Escrow al (714) 265-7116'
-    }
+    meta: { title: 'Servicios de Escrow Residencial | Downtown', description: 'Conoce qué hace el escrow residencial, qué puede afectar un cierre de vivienda y qué consultar con Downtown Community Escrow.' },
+    skipLink: 'Ir al contenido principal', wordmarkLabel: 'Inicio de Downtown Community Escrow', breadcrumbLabel: 'Ruta de navegación', breadcrumbHome: 'Inicio', breadcrumbCurrent: 'Escrow residencial',
+    hero: { eyebrow: 'ESCROW RESIDENCIAL · SANTA ANA, CA', heading: 'Servicios de Escrow Residencial', message: 'Del contrato al cierre, con cada detalle en orden.', intro: 'Comprar o vender una vivienda implica más que firmar documentos. Downtown Community Escrow coordina fondos, documentos e instrucciones de cierre en operaciones inmobiliarias residenciales.', primaryCta: 'Consultar sobre mi escrow', secondaryCta: 'Cómo funciona escrow', marker: 'ER', markerLabel: 'Especialidad 05' },
+    index: { label: 'En esta página', items: [['Qué hace el escrow residencial', 'service-overview'], ['Requisitos del cierre', 'transaction-variables'], ['Prepara tu consulta', 'prepare'], ['Preguntas frecuentes', 'specialty-faq'], ['Recursos útiles', 'related-sources']] },
+    overview: { eyebrow: 'Qué hace el escrow residencial', heading: '¿Qué hace realmente una compañía de escrow residencial?', lead: 'Una compañía de escrow actúa como tercero neutral durante la compra o venta de una vivienda. Resguarda fondos y documentos, y coordina el cierre conforme a las instrucciones de escrow de las partes.', body: 'Downtown coordina el intercambio de información de cierre mientras los demás profesionales mantienen sus propias responsabilidades. El escrow no sustituye al agente inmobiliario, prestamista, aseguradora de título ni asesor legal o fiscal.', boundaryHeading: 'Escrow no sustituye', boundaries: [['Representación inmobiliaria', 'Los agentes negocian precio y términos; escrow no representa a ninguna parte.'], ['Decisiones de préstamo', 'Los prestamistas determinan la elegibilidad y aprueban los préstamos.'], ['Seguro de título', 'Las aseguradoras de título manejan el trabajo de título y emiten pólizas.'], ['Asesoría legal o fiscal', 'Los abogados o profesionales fiscales calificados deben atender esas áreas.']] },
+    variables: { eyebrow: 'Requisitos del cierre', heading: 'Cada cierre tiene sus propios requisitos.', intro: 'El tipo de propiedad, el financiamiento, la documentación y las partes involucradas pueden influir en lo que se necesita para completar un escrow.', items: [['Tipo de propiedad', 'La naturaleza de la propiedad y su documentación pueden afectar los requisitos del cierre.'], ['Financiamiento', 'Las condiciones e instrucciones del prestamista pueden influir cuando existe financiamiento.'], ['Ubicación', 'Los registros y requisitos aplicables pueden variar según la ubicación de la propiedad.'], ['Partes participantes', 'La coordinación depende de las partes y profesionales involucrados en la operación.']] },
+    prepare: { eyebrow: 'Prepara tu consulta', heading: '¿Te estás preparando para consultar sobre tu escrow?', intro: 'Algunos datos sobre la propiedad y la operación pueden ayudarnos a entender mejor tu consulta.', items: [['La propiedad', 'Dirección y tipo de propiedad.'], ['La operación', 'Compra, venta u otra operación aplicable.'], ['Las partes', 'Datos del comprador, vendedor y profesionales involucrados, si están disponibles.'], ['Tus preguntas', 'Cualquier duda que quieras aclarar antes de continuar.']] },
+    information: { eyebrow: 'Nota de preparación', heading: 'Información para una primera conversación.', intro: 'Información orientativa para una primera consulta, no una lista obligatoria de documentos.', items: [] },
+    faq: { eyebrow: 'Preguntas frecuentes', heading: 'Preguntas antes de llamar', intro: 'Respuestas claras para preparar una conversación sobre escrow residencial.', items: [['¿Qué es el escrow residencial?', 'El escrow residencial es un acuerdo neutral en el que una compañía de escrow resguarda fondos y documentos mientras las partes completan las condiciones de una compra o venta de vivienda.'], ['¿Quién elige la compañía de escrow?', 'Las partes pueden acordar la compañía de escrow en los documentos de la operación; no debe asumirse que la decisión corresponde siempre a una sola parte.'], ['¿Qué hace un escrow officer?', 'Un escrow officer sigue las instrucciones escritas de las partes, coordina documentos y fondos, y se comunica con los participantes mientras se atienden los requisitos del cierre.'], ['¿Cuál es la diferencia entre el escrow de cierre y una cuenta para impuestos y seguros?', 'El escrow de cierre es la operación que lleva una compra o venta al cierre. Una cuenta impound o escrow hipotecaria la mantiene el servicer del préstamo para conceptos como impuestos y seguros.'], ['¿Qué puede retrasar el cierre de un escrow residencial?', 'La falta de información, condiciones de título o financiamiento sin resolver, instrucciones incompletas, respuestas tardías o problemas de verificación pueden afectar el calendario. No existe un plazo único para todas las operaciones.']] },
+    sources: { eyebrow: 'Recursos útiles sobre escrow', heading: 'Recursos útiles sobre escrow', intro: 'Estas fuentes independientes ofrecen información general. No son avales de Downtown.', linkLabel: 'Visitar fuente', items: [{ title: 'California DRE – El proceso de escrow', href: 'https://www.dre.ca.gov/files/pdf/escrow_info_consumers.pdf', description: 'Información de California DRE para consumidores sobre fundamentos de escrow, instrucciones escritas, participantes, fondos, registro y prevención de fraude.' }, { title: 'California DFPI – Información al consumidor sobre escrow', href: 'https://dfpi.ca.gov/regulated-industries/escrow-law/consumer-information-escrow/', description: 'Información para consumidores sobre escrow independiente y controlado. No verifica la licencia, alcance o procedimientos de Downtown.' }, { title: 'CFPB – Ser propietario de una vivienda', href: 'https://www.consumerfinance.gov/owning-a-home/', description: 'Orientación federal sobre compra de vivienda, escrow y protecciones al consumidor.' }] },
+    contact: { eyebrow: '¿TIENES UNA OPERACIÓN EN MARCHA?', heading: '¿Tienes preguntas sobre tu escrow residencial?', body: 'Comunícate con Downtown Community Escrow para consultar sobre tu propiedad y la operación que estás realizando.', homeContact: 'Información de contacto principal', callLabel: 'Llama a Downtown Community Escrow al (714) 265-7116' }
   }
-} as const;
-
+} as const satisfies Record<string, SpecialtyContent>;

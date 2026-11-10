@@ -5,8 +5,8 @@ const mapsHref = 'https://www.google.com/maps/search/?api=1&query=640%20North%20
 export const contactContent = {
   en: {
     meta: {
-      title: 'Contact Downtown Community Escrow | Santa Ana',
-      description: 'Contact Downtown Community Escrow by phone or find the verified Santa Ana office address for questions about specialized escrow services.'
+      title: 'Contact Downtown Community Escrow | Direct Office Contact',
+      description: 'Contact Downtown Community Escrow by phone about residential, commercial, or specialized escrow questions.'
     },
     skipLink: 'Skip to main content',
     wordmarkLabel: 'Downtown Community Escrow home',
@@ -14,11 +14,11 @@ export const contactContent = {
     breadcrumbHome: 'Home',
     breadcrumbCurrent: 'Contact',
     hero: {
-      eyebrow: 'Contact Downtown',
-      heading: 'Contact Downtown Community Escrow.',
-      intro: 'Call our Santa Ana office to discuss your property, transaction, and the escrow specialty that may fit your question.',
+      eyebrow: 'CONTACT DOWNTOWN',
+      heading: "Let's Talk About Your Escrow Needs.",
+      intro: 'Have a question about a residential, commercial, or specialized real estate transaction? Contact Downtown Community Escrow to discuss your inquiry.',
       primaryCta: 'Call Downtown',
-      secondaryCta: 'Send us a message',
+      secondaryCta: 'Contact information',
       marker: 'DCE',
       markerLabel: 'Direct contact'
     },
@@ -33,28 +33,20 @@ export const contactContent = {
       ]
     },
     message: {
-      eyebrow: 'Send us a message',
-      heading: 'Online message delivery is not connected yet.',
-      intro: 'The form is shown in a disabled state so the site does not imply that a message will be received. Please call Downtown for an active contact method.',
-      safety: 'Do not include bank information, wire instructions, Social Security numbers, account numbers, or other confidential information in a general contact message.',
-      fields: {
-        name: 'Full name',
-        phone: 'Phone number',
-        service: 'Escrow topic',
-        servicePlaceholder: 'Choose a topic',
-        message: 'How can we help?',
-        submit: 'Send message — not available'
-      },
-      topics: ['Manufactured or mobile home', 'Short sale', 'Probate', 'Reverse mortgage', 'Residential', 'Commercial', 'General question'],
-      status: 'Online submissions are not currently available. Call Downtown instead.',
+      eyebrow: 'DIRECT CONTACT',
+      heading: 'Call Our Office',
+      intro: 'Speak with Downtown about your escrow inquiry.',
+      safety: 'Please do not share bank information, wire instructions, Social Security numbers, account numbers, or confidential information through an unapproved channel.',
+      callLabel: 'Verified office number',
+      note: 'Call Downtown to discuss your question and the appropriate next conversation.',
       callAction: 'Call Downtown'
     },
     office: {
       eyebrow: 'Visit our office',
-      heading: 'Downtown Community Escrow in Santa Ana.',
+      heading: 'Visit Our Office',
       intro: 'Use the confirmed address to review the location or open directions in Google Maps. Office hours and walk-in availability are not stated because they are not verified.',
       addressLabel: 'Office address',
-      directions: 'Get directions',
+      directions: 'Get Directions',
       mapsHref
     },
     faq: {
@@ -63,9 +55,9 @@ export const contactContent = {
       intro: 'Straightforward answers based on currently confirmed business information.',
       items: [
         ['Where is Downtown Community Escrow located?', `${business.legalName} has an office at ${business.addressLine}, ${business.cityLine}.`],
-        ['How can I contact Downtown?', `Call ${business.phoneDisplay}. An online form and public business email are not currently available on this site.`],
+        ['How can I contact Downtown?', `Call ${business.phoneDisplay} to speak with Downtown about your escrow inquiry.`],
         ['What information should I have ready?', 'Have the property address or general location, transaction type, your role, the escrow specialty involved, and the questions you want to discuss. Do not send banking, wire, Social Security, or other confidential information through a general inquiry.'],
-        ['Can I ask about a specific escrow service?', 'Yes. Downtown has dedicated pages for manufactured and mobile homes, short sales, probate, reverse mortgages, residential transactions, and commercial real estate transactions. The company can confirm whether a particular matter is within its current scope.']
+        ['Can I ask about a specific escrow service?', 'Yes. Downtown has dedicated pages for manufactured and mobile homes, short sales, probate, reverse mortgages, residential transactions, commercial real estate transactions, and wholesale real estate escrow. The company can confirm whether a particular matter is within its current scope.']
       ]
     },
     finalAction: {
@@ -77,8 +69,8 @@ export const contactContent = {
   },
   es: {
     meta: {
-      title: 'Contacto | Downtown Community Escrow en Santa Ana',
-      description: 'Contacta a Downtown Community Escrow por teléfono o consulta la dirección verificada de su oficina en Santa Ana para preguntas de escrow.'
+      title: 'Contacto | Downtown Community Escrow',
+      description: 'Comunícate por teléfono con Downtown Community Escrow para preguntas sobre operaciones residenciales, comerciales o especializadas de escrow.'
     },
     skipLink: 'Ir al contenido principal',
     wordmarkLabel: 'Inicio de Downtown Community Escrow',
@@ -86,11 +78,11 @@ export const contactContent = {
     breadcrumbHome: 'Inicio',
     breadcrumbCurrent: 'Contacto',
     hero: {
-      eyebrow: 'Contactar a Downtown',
-      heading: 'Contacta a Downtown Community Escrow.',
-      intro: 'Llama a nuestra oficina en Santa Ana para conversar sobre tu propiedad, operación y la especialidad de escrow relacionada con tu consulta.',
+      eyebrow: 'CONTACTA A DOWNTOWN',
+      heading: 'Hablemos sobre tu operación de escrow.',
+      intro: '¿Tienes preguntas sobre una operación inmobiliaria residencial, comercial o especializada? Comunícate con Downtown Community Escrow para conversar sobre tu consulta.',
       primaryCta: 'Llamar a Downtown',
-      secondaryCta: 'Enviar un mensaje',
+      secondaryCta: 'Información de contacto',
       marker: 'DCE',
       markerLabel: 'Contacto directo'
     },
@@ -105,28 +97,20 @@ export const contactContent = {
       ]
     },
     message: {
-      eyebrow: 'Envíanos un mensaje',
-      heading: 'El envío de mensajes en línea todavía no está conectado.',
-      intro: 'El formulario aparece deshabilitado para no insinuar que se recibirá un mensaje. Llama a Downtown para utilizar un medio de contacto activo.',
-      safety: 'No incluyas información bancaria, instrucciones de transferencia, números de Seguro Social, números de cuenta u otra información confidencial en un mensaje general.',
-      fields: {
-        name: 'Nombre completo',
-        phone: 'Número de teléfono',
-        service: 'Tema de escrow',
-        servicePlaceholder: 'Elige un tema',
-        message: '¿Cómo podemos ayudarte?',
-        submit: 'Enviar mensaje — no disponible'
-      },
-      topics: ['Casa manufacturada o móvil', 'Short sale', 'Probate', 'Hipoteca inversa', 'Residencial', 'Comercial', 'Pregunta general'],
-      status: 'Los envíos en línea no están disponibles actualmente. Llama a Downtown.',
+      eyebrow: 'CONTACTO DIRECTO',
+      heading: 'Llama a nuestra oficina',
+      intro: 'Comunícate con Downtown para consultar sobre tu operación de escrow.',
+      safety: 'No compartas información bancaria, instrucciones de transferencia, números de Seguro Social, números de cuenta u otra información confidencial mediante un canal no aprobado.',
+      callLabel: 'Número de oficina verificado',
+      note: 'Llama a Downtown para conversar sobre tu pregunta y el siguiente paso apropiado.',
       callAction: 'Llamar a Downtown'
     },
     office: {
       eyebrow: 'Visita nuestra oficina',
-      heading: 'Downtown Community Escrow en Santa Ana.',
+      heading: 'Visita nuestra oficina',
       intro: 'Utiliza la dirección confirmada para consultar la ubicación o abrir indicaciones en Google Maps. No indicamos horarios ni atención sin cita porque no están verificados.',
       addressLabel: 'Dirección de la oficina',
-      directions: 'Obtener indicaciones',
+      directions: 'Cómo llegar',
       mapsHref
     },
     faq: {
@@ -135,7 +119,7 @@ export const contactContent = {
       intro: 'Respuestas directas basadas en la información empresarial actualmente confirmada.',
       items: [
         ['¿Dónde está Downtown Community Escrow?', `${business.legalName} tiene una oficina en ${business.addressLine}, ${business.cityLine}.`],
-        ['¿Cómo puedo contactar a Downtown?', `Llama al ${business.phoneDisplay}. Este sitio todavía no ofrece un formulario en línea ni publica un correo empresarial.`],
+        ['¿Cómo puedo contactar a Downtown?', `Llama al ${business.phoneDisplay} para conversar con Downtown sobre tu consulta de escrow.`],
         ['¿Qué información debo tener preparada?', 'Ten a la mano la dirección o ubicación general de la propiedad, el tipo de operación, tu función, la especialidad de escrow y las preguntas que deseas consultar. No envíes datos bancarios, instrucciones de transferencia, números de Seguro Social u otra información confidencial en una consulta general.'],
         ['¿Puedo preguntar por un servicio de escrow específico?', 'Sí. Downtown tiene páginas para casas manufacturadas y móviles, short sales, probate, hipotecas inversas, operaciones residenciales y bienes raíces comerciales. La compañía puede confirmar si un caso particular está dentro de su alcance actual.']
       ]

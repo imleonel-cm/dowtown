@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { business, type ServiceIconName } from '../data/business';
-import { homeContent, routeMap, withBasePath, type Locale, type PageKey } from '../data/site';
+import { homeContent, routeMap, type Locale, type PageKey } from '../data/site';
 import type { SpecialtyContent } from '../data/specialty';
 import { navigationFor } from '../data/navigation';
 import { serviceNavigationFor } from '../data/serviceLinks';
@@ -16,7 +16,7 @@ import ServiceContact from './services/ServiceContact.astro';
 
 interface Props {
   locale: Locale;
-  pageKey: Extract<PageKey, 'manufacturedHomes' | 'probate' | 'shortSale' | 'reverseMortgage' | 'residential' | 'commercial'>;
+  pageKey: Extract<PageKey, 'manufacturedHomes' | 'probate' | 'shortSale' | 'reverseMortgage' | 'residential' | 'commercial' | 'wholesale'>;
   content: SpecialtyContent;
   icon: ServiceIconName;
   faqGroupName: string;
@@ -55,10 +55,11 @@ const breadcrumbItems = [
           <div class="specialty-hero__copy">
             <p class="eyebrow">{content.hero.eyebrow}</p>
             <h1>{content.hero.heading}</h1>
+            {content.hero.message && <p class="specialty-hero__message">{content.hero.message}</p>}
             <p>{content.hero.intro}</p>
             <div class="button-row">
               <a class="button" href={business.phoneHref}>{content.hero.primaryCta} <Arrow /></a>
-              <a class="button button--outline" href={`${homeHref}#services`}>{content.hero.secondaryCta}</a>
+              <a class="button button--outline" href={pageKey === 'residential' || pageKey === 'commercial' || pageKey === 'probate' || pageKey === 'manufacturedHomes' || pageKey === 'shortSale' || pageKey === 'reverseMortgage' || pageKey === 'wholesale' ? '#service-overview' : `${homeHref}#services`}>{content.hero.secondaryCta}</a>
             </div>
           </div>
           <div class="specialty-hero__mark" aria-hidden="true">
@@ -136,7 +137,7 @@ const breadcrumbItems = [
       </div>
     </section>
 
-    <section id="consultation-information" class="specialty-information section-anchor">
+    {!((pageKey === 'residential' || pageKey === 'commercial' || pageKey === 'probate' || pageKey === 'manufacturedHomes' || pageKey === 'shortSale' || pageKey === 'reverseMortgage' || pageKey === 'wholesale') && content.information.items.length === 0) && <section id="consultation-information" class="specialty-information section-anchor">
       <div class="container specialty-information__layout">
         <div>
           <p class="eyebrow">{content.information.eyebrow}</p>
@@ -147,7 +148,7 @@ const breadcrumbItems = [
           {content.information.items.map((item) => <li><span aria-hidden="true">✓</span>{item}</li>)}
         </ul>
       </div>
-    </section>
+    </section>}
 
     <ServiceQuestions content={content.faq} id="specialty-faq" groupName={faqGroupName} />
 
@@ -161,7 +162,7 @@ const breadcrumbItems = [
           </div>
           <div class="specialty-related__list">
             {content.relatedServices.items.map((service) => (
-              <a href={withBasePath(service.href)}>
+              <a href={service.href}>
                 <span><strong>{service.title}</strong><small>{service.description}</small></span>
                 <span class="text-link">{content.relatedServices?.actionLabel} <Arrow /></span>
               </a>
@@ -186,6 +187,27 @@ const breadcrumbItems = [
               <a class="text-link" href={source.href} target="_blank" rel="noreferrer">{content.sources.linkLabel} <Arrow /></a>
             </article>
           ))}
+          {content.sources.contextualLink && (
+            <article class="specialty-source-contextual">
+              <h3>{content.sources.contextualLink.label}</h3>
+              <p>{content.sources.contextualLink.description}</p>
+              <a class="text-link" href={content.sources.contextualLink.href}>{content.sources.linkLabel} <Arrow /></a>
+            </article>
+          )}
+          {content.sources.contextualLinks?.map((link) => (
+            <article class="specialty-source-contextual">
+              <h3>{link.label}</h3>
+              <p>{link.description}</p>
+              <a class="text-link" href={link.href}>{content.sources.linkLabel} <Arrow /></a>
+            </article>
+          ))}
+          {pageKey === 'probate' && (
+            <article class="specialty-source-contextual">
+              <h3>{locale === 'en' ? 'Short Sale Escrow' : 'Escrow de Short Sale'}</h3>
+              <p>{locale === 'en' ? 'Review this specialty when the proposed sale also depends on lender approval of short sale terms.' : 'Revisa esta especialidad cuando la venta propuesta también dependa de la aprobación de un prestamista para las condiciones de una short sale.'}</p>
+              <a class="text-link" href={locale === 'en' ? '/services/short-sale-escrow/' : '/es/servicios/escrow-short-sale/'}>{content.sources.linkLabel} <Arrow /></a>
+            </article>
+          )}
         </div>
       </div>
     </section>

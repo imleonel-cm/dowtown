@@ -1,10 +1,12 @@
 ---
 import { business } from '../../data/business';
 import type { HomeContent } from '../../data/site';
+import type { Locale } from '../../data/site';
+import { routeMap } from '../../data/site';
 import Arrow from '../Arrow.astro';
 
-interface Props { content: HomeContent['contact'] }
-const { content } = Astro.props;
+interface Props { content: HomeContent['contact']; locale: Locale }
+const { content, locale } = Astro.props;
 ---
 
 <section id="contact" class="contact-cta section-anchor">
@@ -15,8 +17,9 @@ const { content } = Astro.props;
       <h2>{content.headingLines[0]}<br />{content.headingLines[1]}</h2>
       <p>{content.body}</p>
     </div>
-    <a class="phone-button" href={business.phoneHref} aria-label={content.callLabel}>
-      {business.phoneDisplay} <Arrow />
-    </a>
+    <div class="contact-cta__actions">
+      <a class="contact-button" href={routeMap.contact[locale]}>{content.contactLabel} <Arrow /></a>
+      <a class="phone-button" href={business.phoneHref} aria-label={content.callLabel}><span aria-hidden="true">☎</span>{locale === 'en' ? business.phoneDisplay : 'Llamar a la oficina'} <Arrow /></a>
+    </div>
   </div>
 </section>
