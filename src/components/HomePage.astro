@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { homeContent, routeMap, type Locale } from '../data/site';
-import { featureFlags } from '../data/features';
 import { navigationFor } from '../data/navigation';
 import { serviceHrefsFor, serviceNavigationFor } from '../data/serviceLinks';
 import Header from './Header.astro';
@@ -11,7 +10,6 @@ import Hero from './home/Hero.astro';
 import Services from './home/Services.astro';
 import Office from './home/Office.astro';
 import Questions from './home/Questions.astro';
-import Resource from './home/Resource.astro';
 import ContactCta from './home/ContactCta.astro';
 
 interface Props { locale: Locale }
@@ -28,11 +26,10 @@ const serviceHrefs = serviceHrefsFor(locale);
   <a class="skip-link" href="#main-content">{content.skipLink}</a>
   <Header locale={locale} content={headerContent} wordmarkLabel={content.wordmarkLabel} activePageKey="home" ctaHref={routeMap.contact[locale]} />
   <main id="main-content">
-    <Hero content={content.hero} servicesHref={servicesHref} contactHref={routeMap.contact[locale]} serviceHrefs={serviceHrefs} />
+    <Hero content={content.hero} servicesHref={servicesHref} contactHref={routeMap.contact[locale]} />
     <Services content={content.services} serviceHrefs={serviceHrefs} />
     <Office content={content.why} />
     <Questions content={content.questions} />
-    {featureFlags.resources && <Resource content={content.resource} />}
     <ContactCta content={content.contact} locale={locale} />
   </main>
   <Footer locale={locale} content={content.footer} navigation={navigation} services={serviceNavigation} wordmarkLabel={content.wordmarkLabel} />

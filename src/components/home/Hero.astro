@@ -1,17 +1,14 @@
 ---
 import type { HomeContent } from '../../data/site';
-import type { ServiceCatalogKey } from '../../data/business';
 import Arrow from '../Arrow.astro';
-import ServiceIcon from '../ServiceIcon.astro';
 
 interface Props {
   content: HomeContent['hero'];
   servicesHref: string;
   contactHref: string;
-  serviceHrefs: Partial<Record<ServiceCatalogKey, string>>;
 }
 
-const { content, servicesHref, contactHref, serviceHrefs } = Astro.props;
+const { content, servicesHref, contactHref } = Astro.props;
 ---
 
 <section id="home" class="hero section-anchor">
@@ -38,17 +35,5 @@ const { content, servicesHref, contactHref, serviceHrefs } = Astro.props;
         <span class="document-stack__seal">✓</span>
       </div>
     </div>
-    <nav class="hero-specialties" aria-label={content.featuredLabel}>
-      {content.featuredServices.map((service) => (
-        <a class="hero-specialty-card" href={serviceHrefs[service.key]}>
-          <ServiceIcon name={service.key === 'probate' ? 'people' : service.key} />
-          <span class="hero-specialty-card__copy">
-            <strong>{service.title}</strong>
-            <span>{service.description}</span>
-          </span>
-          <span class="hero-specialty-card__arrow" aria-hidden="true"><Arrow /></span>
-        </a>
-      ))}
-    </nav>
   </div>
 </section>

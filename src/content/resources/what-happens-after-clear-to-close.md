@@ -7,6 +7,7 @@ editorialOrder: 2
 category: "Escrow Process"
 featuredImage: "/images/resources/Your Loan.png"
 imageAlt: "Clear to Close graphic with a home, keys, and closing documents"
+translationRef: "que-sucede-despues-de-clear-to-close"
 draft: false
 ---
 

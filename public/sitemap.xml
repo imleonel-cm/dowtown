@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://downtownescrow.net/</loc></url>
-  <url><loc>https://downtownescrow.net/es/</loc></url>
   <url><loc>https://downtownescrow.net/about/</loc></url>
-  <url><loc>https://downtownescrow.net/es/nosotros/</loc></url>
   <url><loc>https://downtownescrow.net/contact/</loc></url>
+  <url><loc>https://downtownescrow.net/es/</loc></url>
   <url><loc>https://downtownescrow.net/es/contacto/</loc></url>
-  <url><loc>https://downtownescrow.net/privacy-policy/</loc></url>
+  <url><loc>https://downtownescrow.net/es/nosotros/</loc></url>
   <url><loc>https://downtownescrow.net/es/politica-de-privacidad/</loc></url>
-  <url><loc>https://downtownescrow.net/terms-and-conditions/</loc></url>
-  <url><loc>https://downtownescrow.net/es/terminos-y-condiciones/</loc></url>
-  <url><loc>https://downtownescrow.net/services/manufactured-home-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/es/recursos/</loc></url>
+  <url><loc>https://downtownescrow.net/es/recursos/que-puede-retrasar-el-cierre-de-un-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/es/recursos/que-sucede-despues-de-clear-to-close/</loc></url>
   <url><loc>https://downtownescrow.net/es/servicios/escrow-casas-manufacturadas/</loc></url>
-  <url><loc>https://downtownescrow.net/services/short-sale-escrow/</loc></url>
-  <url><loc>https://downtownescrow.net/es/servicios/escrow-short-sale/</loc></url>
-  <url><loc>https://downtownescrow.net/services/probate-escrow/</loc></url>
-  <url><loc>https://downtownescrow.net/es/servicios/escrow-probate/</loc></url>
-  <url><loc>https://downtownescrow.net/services/reverse-mortgage-escrow/</loc></url>
-  <url><loc>https://downtownescrow.net/es/servicios/escrow-hipoteca-inversa/</loc></url>
-  <url><loc>https://downtownescrow.net/services/residential-escrow/</loc></url>
-  <url><loc>https://downtownescrow.net/es/servicios/escrow-residencial/</loc></url>
-  <url><loc>https://downtownescrow.net/services/commercial-escrow/</loc></url>
   <url><loc>https://downtownescrow.net/es/servicios/escrow-comercial/</loc></url>
-  <url><loc>https://downtownescrow.net/services/wholesale-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/es/servicios/escrow-hipoteca-inversa/</loc></url>
+  <url><loc>https://downtownescrow.net/es/servicios/escrow-probate/</loc></url>
+  <url><loc>https://downtownescrow.net/es/servicios/escrow-residencial/</loc></url>
+  <url><loc>https://downtownescrow.net/es/servicios/escrow-short-sale/</loc></url>
   <url><loc>https://downtownescrow.net/es/servicios/escrow-wholesale/</loc></url>
+  <url><loc>https://downtownescrow.net/es/terminos-y-condiciones/</loc></url>
+  <url><loc>https://downtownescrow.net/privacy-policy/</loc></url>
+  <url><loc>https://downtownescrow.net/resources/</loc></url>
+  <url><loc>https://downtownescrow.net/resources/what-can-delay-an-escrow-closing/</loc></url>
+  <url><loc>https://downtownescrow.net/resources/what-happens-after-clear-to-close/</loc></url>
+  <url><loc>https://downtownescrow.net/services/commercial-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/services/manufactured-home-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/services/probate-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/services/residential-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/services/reverse-mortgage-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/services/short-sale-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/services/wholesale-escrow/</loc></url>
+  <url><loc>https://downtownescrow.net/terms-and-conditions/</loc></url>
 </urlset>

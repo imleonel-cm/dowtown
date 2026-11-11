@@ -5,6 +5,9 @@ slug: "what-can-delay-an-escrow-closing"
 language: en
 editorialOrder: 1
 category: "Escrow Closing"
+featuredImage: "/images/resources/delay-closing.png"
+imageAlt: "Escrow closing checklist with a clock, warning sign, keys, and documents"
+translationRef: "que-puede-retrasar-el-cierre-de-un-escrow"
 draft: false
 ---
 

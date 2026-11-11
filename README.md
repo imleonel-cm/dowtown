@@ -41,11 +41,11 @@ The currently functional primary navigation is:
 - EN: Home, Services, About, Contact.
 - ES: Inicio, Servicios, Nosotros, Contacto.
 
-Services/Servicios is a single disclosure button, not a link to a hub. Its nested list contains six real links—Manufactured & mobile homes, Short sales, Probate, Reverse mortgage, Residential, and Commercial. No specialty remains marked Coming soon/Próximamente. About/Nosotros points to its independent localized page pair; Contact/Contacto continues to use the localized Home contact section until its page pair is implemented. Agents & Lenders and Resources remain hidden until real destinations exist; `featureFlags.resources` remains `false`.
+Services/Servicios is a single disclosure button, not a link to a hub. Its shared presentation catalog is ordered Residential, Commercial, Probate, Manufactured & Mobile Homes, Short Sales, Reverse Mortgage, and Wholesale. Manufactured & Mobile Homes is one label linked to the existing localized page; Wholesale is visible as Coming soon/Próximamente without a link or route. The six implemented specialty pages remain unchanged. Agents & Lenders and Resources remain hidden until real destinations exist; `featureFlags.resources` remains `false`.
 
 The desktop and mobile disclosure is progressively enhanced. It supports click/touch, Enter, Space, ordered Escape handling, focus return, outside-click closing, `inert` while hidden, and breakpoint changes at 880/881 px. Without JavaScript, the nested list remains visible and the real specialty link stays usable.
 
-Footer service destinations come from the same shared service data. All six specialties are implemented links. The fixed `EN | ES` selector uses equivalent-page links and retains full localized accessible names, `lang`, `hreflang`, and current-language state without cookies, redirects, or stored preference.
+Home, About, the desktop/mobile disclosure, and the footer consume the same ordered service catalog. Six entries link to implemented specialties and Wholesale is the single pending non-link. The fixed `EN | ES` selector uses equivalent-page links and retains full localized accessible names, `lang`, `hreflang`, and current-language state without cookies, redirects, or stored preference.
 
 ## Local development
 
@@ -131,7 +131,11 @@ Run the focused browser validator against a local preview:
 & ".\.tools\node-v24.16.0-win-x64\node.exe" scripts\validate-site.mjs http://127.0.0.1:4321
 ```
 
-It checks the sixteen rendered pages at 320, 390, 768, 880, 881, 1024, 1440, and 1920 CSS pixels; metadata; canonical/hreflang/noindex; active states; shared service links; disclosure keyboard/focus behavior; no-JavaScript access; FAQ exclusivity; reduced motion; footer clearance; console errors; a nonexistent-route 404; and both static legacy redirects.
+It checks the eighteen rendered pages at 320, 390, 768, 880, 881, 1024, 1440, and 1920 CSS pixels; metadata; canonical/hreflang/noindex; active states; shared service order and links; disclosure keyboard/focus behavior; no-JavaScript access; FAQ exclusivity; reduced motion; footer clearance; console errors; a nonexistent-route 404; and both static legacy redirects.
+
+The service-navigation reordering and its validation evidence are documented in [`docs/content/services-navigation-reorder-review-2026-11-05.md`](docs/content/services-navigation-reorder-review-2026-11-05.md).
+
+The controlled bilingual Home Hero redesign is documented in [`docs/content/home-hero-v2-implementation-review-2026-11-05.md`](docs/content/home-hero-v2-implementation-review-2026-11-05.md). It preserves the existing responsive image and overlays, introduces the approved EN/ES copy and Contact destinations, and replaces the three compact tabs with keyboard-accessible Residential, Commercial, and Probate cards. Current Playwright evidence is under `artifacts/home-hero-v2-2026-11-05/`.
 
 Current Commercial review captures:
 
@@ -208,3 +212,7 @@ That phase produced the Probate research plan only. The later approved implement
 The six pages that existed at the time were audited after the owner-confirmed address correction. That historical build, 48-case validator, and 18-record Playwright review passed without page failures or console errors. The audit documents page-level findings, launch blockers, schema and crawl gaps, performance risk, evidence limits, and the approvals required before further implementation.
 
 See [`docs/content/seo-aeo-geo-implementation-audit-2026-10-28.md`](docs/content/seo-aeo-geo-implementation-audit-2026-10-28.md). Its browser evidence is stored in `artifacts/seo-aeo-geo-audit-2026-10-28/`. The site remains local, `noindex, nofollow`, and unpublished.
+
+## Wholesale Real Estate Escrow (2026-11-09)
+
+Wholesale Real Estate Escrow is now the seventh active bilingual specialty. Routes are `/services/wholesale-escrow/` and `/es/servicios/escrow-wholesale/`. The page uses the shared specialty template, five FAQs, official DFPI/DRE resources, and neutral language that does not confirm assignment or double-closing structures. All seven specialties are active in the shared navigation; Resources and Agents & Lenders remain hidden. Development remains local with `noindex, nofollow`.

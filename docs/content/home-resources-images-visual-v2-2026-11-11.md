@@ -66,17 +66,6 @@ La revisión confirmó:
 - El validador existente se ejecutó sin modificarlo, pero falló por una expectativa antigua de navegación (`#mobile-homes`) que ya no existe en la arquitectura actual. El fallo no ocurrió durante la compilación ni en la carga de imágenes; queda documentado como limitación del validador.
 - No se ejecutó una publicación ni sincronización con GitHub.
 
-## Sincronización del preview
-
-- Rama: `main`.
-- Commit de la actualización visual: `377d424` (`Update Home and Resources imagery and card layouts`).
-- Workflow: [GitHub Actions run 43066433371](https://github.com/imleonel-cm/dowtown/actions/runs/43066433371), completado correctamente.
-- Preview: `https://imleonel-cm.github.io/dowtown/`.
-- Verificación pública HTTP 200: Home EN/ES, Resources EN/ES, los dos artículos EN y los tres assets nuevos.
-- Captura pública: `artifacts/screenshots/github-pages-preview-1440.png`.
-- El dominio `https://downtownescrow.net` no fue modificado.
-- No se sincronizaron `node_modules`, `dist`, `.astro`, logs, temporales, credenciales ni archivos `.env`.
-
 ## Pendientes
 
 - Confirmar si `employer-escrow.jpeg` debe conservar el texto incrustado visible en el Hero o si se requiere una versión editorial sin texto.
