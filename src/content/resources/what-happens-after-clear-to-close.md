@@ -5,6 +5,8 @@ slug: "what-happens-after-clear-to-close"
 language: en
 editorialOrder: 2
 category: "Escrow Process"
+featuredImage: "/images/resources/Your Loan.png"
+imageAlt: "Clear to Close graphic with a home, keys, and closing documents"
 draft: false
 ---
 

@@ -1,8 +1,6 @@
 ---
 import { business } from '../../data/business';
 import type { HomeContent } from '../../data/site';
-import { Picture } from 'astro:assets';
-import residentialEscrowImage from '../../assets/residential-escrow-illustration.png';
 import Arrow from '../Arrow.astro';
 
 interface Props { content: HomeContent['why'] }
@@ -13,20 +11,7 @@ const { content } = Astro.props;
   <div class="container office-grid">
     <figure class="office-image">
       <div class="office-image__frame">
-        <Picture
-          src={residentialEscrowImage}
-          formats={['avif', 'webp']}
-          fallbackFormat="jpg"
-          widths={[390, 640, 960, 1280, 1536]}
-          sizes="(max-width: 760px) calc(100vw - 36px), 45vw"
-          width={1536}
-          height={1024}
-          quality={82}
-          alt={content.imageAlt}
-          loading="lazy"
-          decoding="async"
-          pictureAttributes={{ class: 'responsive-picture' }}
-        />
+        <img class="responsive-picture" src="/images/home/about.png" width="198" height="197" alt={content.imageAlt} loading="lazy" decoding="async" />
       </div>
       <figcaption>{content.imageCaption}</figcaption>
       <span class="office-image__address" aria-hidden="true">{content.markerTop}<br /><strong>{content.markerBottom}</strong></span>

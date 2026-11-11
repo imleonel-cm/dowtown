@@ -1,8 +1,6 @@
 ---
 import type { HomeContent } from '../../data/site';
 import type { ServiceCatalogKey } from '../../data/business';
-import { Picture } from 'astro:assets';
-import residentialEscrowImage from '../../assets/residential-escrow-illustration.png';
 import Arrow from '../Arrow.astro';
 import ServiceIcon from '../ServiceIcon.astro';
 
@@ -30,21 +28,7 @@ const { content, servicesHref, contactHref, serviceHrefs } = Astro.props;
     <div class="hero-visual">
       <div class="hero-visual__backdrop" aria-hidden="true"></div>
       <figure class="hero-photo">
-        <Picture
-          src={residentialEscrowImage}
-          formats={['avif', 'webp']}
-          fallbackFormat="jpg"
-          widths={[390, 640, 960, 1280, 1536]}
-          sizes="(max-width: 620px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 47vw"
-          width={1536}
-          height={1024}
-          quality={82}
-          alt={content.imageAlt}
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          pictureAttributes={{ class: 'responsive-picture' }}
-        />
+        <img class="responsive-picture" src="/images/home/employer-escrow.jpeg" width="1200" height="1200" alt={content.imageAlt} loading="eager" decoding="async" fetchpriority="high" />
         <figcaption>{content.imageCaption}</figcaption>
       </figure>
       <div class="document-stack" aria-hidden="true">
